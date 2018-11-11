@@ -1,7 +1,7 @@
 {
     "home": {
-        "title": "Witamy, Java Hipsterze!",
-        "subtitle": "To jest twoja strona domowa",
+        "title": "Witamy na giełdzie kryptowalut",
+        "subtitle": "Sprzedawaj, kupuj, inwestuj!!!",
         "logged": {
             "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
         },
