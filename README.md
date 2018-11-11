@@ -3,10 +3,15 @@ This application was generated using JHipster 5.4.2, you can find documentation 
 
 ## Krok po kroku
 1.Ściągamy repozytorium
+
 2. Instalujemy node.js
+
 3. Instalujemy docker'a
+
 4. Uruchamiamy Intelij dajemy import projet -> wybieramy plik  pom.xml  -> przehcodzimy przez konfigurację zaznaczamy (import projekt automatically ) w okienku z check box'ami zaznaczamy je wszystkie. Po zakończeniu konfiguracji Intelij będzie indexował pliki, będzie to chwilę trwało.
+
 5. Wchodzimyy przez konsolę do katalogu gdzie mamy repo wpisujemy yarn install
+
 6. Synchornizujemy bazę danych ja jakiej pracujmey.
 
 Więcej infomracji poniżej 
