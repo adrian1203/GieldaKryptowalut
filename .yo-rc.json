@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.io.app",
+      "nativeLanguage": "pl"
+    },
+    "jhipsterVersion": "5.4.2",
+    "applicationType": "monolith",
+    "baseName": "GieldaKryptowalut",
+    "packageName": "com.io.app",
+    "packageFolder": "com/io/app",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZWY0ZDRiMTExNGQyMDZmNDcwZjgwM2Q2ZjRhMzYxMjQ5MGVjYjUxNmZkNWQ5NWNkNGZiOGViMjFkMTlkMTcxYTM0YzZjODBhZGM2OWVlOTA5YjAzNzkzYjkxYzE4OTI2N2Y1NDE0NzI3ZmE2NTkzNGVmNDJjMGRhZmI2ZGM4YTM=",
+    "clientFramework": "angularX",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "enableTranslation": true,
+    "nativeLanguage": "pl",
+    "languages": [
+      "pl"
+    ]
+  }
+}
