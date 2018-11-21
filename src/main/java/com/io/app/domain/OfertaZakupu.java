@@ -13,18 +13,17 @@ public class OfertaZakupu {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Size(min = 1,max = 8)
-    @Column(name = "cena",length = 8)
+    @Column(name = "cena")
     private double cena;
     @Size(min=10,max = 10)
     @Column(name = "data_wystawienia", length = 10)
     private String data_wystawienia;
-    @Size(min = 1,max = 50)
+    @Size(max = 50)
     @Column(name = "waluta",length = 50)
     private String waluta;
-    @Size(max = 100)
-    @Column(name = "jhi_user_id",length = 100)
-    private int jhi_user_id;
+
+    @OneToOne
+    private User user;
 
 
     @Override
@@ -44,7 +43,6 @@ public class OfertaZakupu {
             ", cena='" + cena + '\'' +
             ", data_wystawienia='" + data_wystawienia + '\'' +
             ", waluta='" + waluta + '\'' +
-            ", jhi_user_id='" + jhi_user_id + '\''+
             '}';
     }
 
@@ -81,12 +79,12 @@ public class OfertaZakupu {
         this.waluta = waluta;
     }
 
-    public int getJhi_user_id() {
-        return jhi_user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setJhi_user_id(int jhi_user_id) {
-        this.jhi_user_id = jhi_user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

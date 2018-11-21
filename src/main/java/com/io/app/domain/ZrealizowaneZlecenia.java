@@ -13,17 +13,15 @@ public class ZrealizowaneZlecenia {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Size(max = 100)
-    @Column(name = "oferta_sprzedazy_id",length = 100)
+
+    @Column(name = "oferta_sprzedazy_id")
     private Long oferta_sprzedazy_id;
     @Size(max = 100)
     @Column(name = "data_realizacji",length = 100)
     private String data_realizacji;
-    @Size(max = 100)
-    @Column(name = "cena",length = 100)
+    @Column(name = "cena")
     private double cena;
-    @Size(max = 100)
-    @Column(name = "oferta_zakupu_id",length = 100)
+    @Column(name = "oferta_zakupu_id")
     private Long oferta_zakupu_id;
 
 

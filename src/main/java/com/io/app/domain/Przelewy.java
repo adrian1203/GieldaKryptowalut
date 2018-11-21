@@ -16,8 +16,7 @@ public class Przelewy {
     @Size(min=10,max = 10)
     @Column(name = "data", length = 10)
     private String data;
-    @Size(max = 100)
-    @Column(name = "wartosc",length = 100)
+    @Column(name = "wartosc")
     private double wartosc;
     @Size(min = 1,max = 50)
     @Column(name = "waluta",length = 50)
@@ -28,6 +27,8 @@ public class Przelewy {
     @Size(min = 26, max = 26)
     @Column(name="z_konto_bankowe_id",length = 26)
     private String z_konto_bankowe_id;
+
+
 
     @Override
     public boolean equals(Object o) {

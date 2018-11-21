@@ -17,15 +17,14 @@ public class KontoBankowe {
     @Size(min = 26, max = 26)
     @Column(name="numer",length = 26)
     private String numer;
-    @Size(min = 1, max = 10)
-    @Column(name = "stan_konta",length = 10)
+    @Column(name = "stan_konta")
     private double stan_konta;
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "waluta",length =50 )
     private String waluta;
-    @Size(min = 1, max = 10)
-    @Column(name = "jhi_user_id", length = 10)
-    private int jhi_user_id;
+
+    @OneToOne
+    private User user;
 
 
     //Constructor
@@ -51,7 +50,6 @@ public class KontoBankowe {
             ", numer='" + numer + '\'' +
             ", stan_konta='" + stan_konta + '\'' +
             ", waluta='" + waluta + '\'' +
-            ", jhi_user_id='" + jhi_user_id + '\''+
             '}';
     }
 
@@ -90,12 +88,12 @@ public class KontoBankowe {
         this.waluta = waluta;
     }
 
-    public int getJhi_user_id() {
-        return jhi_user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setJhi_user_id(int jhi_user_id) {
-        this.jhi_user_id = jhi_user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
 
