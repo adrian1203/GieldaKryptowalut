@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MojeKontoModule } from './moje-konto/moje-konto.module';
+// import { MojeKontoModule } from './moje-konto/moje-konto.module';
 import { RouterModule } from '@angular/router';
 import { MojeKontoComponent } from './moje-konto/moje-konto.component';
 import { GieldaKryptowalutSharedModule } from '../shared/shared.module';
