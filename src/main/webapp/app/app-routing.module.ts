@@ -13,6 +13,10 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
                 {
                     path: 'admin',
                     loadChildren: './admin/admin.module#GieldaKryptowalutAdminModule'
+                },
+                {
+                    path: 'entity',
+                    loadChildren: './entities/entity.module#GieldaKryptowalutEntityModule'
                 }
             ],
             { useHash: true, enableTracing: DEBUG_INFO_ENABLED }
