@@ -104,6 +104,10 @@ jhipster:
         exposed-headers: "Authorization,Link,X-Total-Count"
         allow-credentials: true
         max-age: 1800
+
+    gateway:
+        authorized-microservices-endpoints: # Access Control Policy, if left empty for a route, all endpoints will be accessible
+            app1: /api,/v2/api-docs # recommended dev configuration
     security:
         authentication:
             jwt:
