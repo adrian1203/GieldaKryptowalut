@@ -19,8 +19,8 @@ public class DaneKorespondencyjne {
     @Column(name = "miejscowosc", length = 100)
     private String miejscowosc;
     @Size(max = 100)
-    @Column(name = "kodpocztowy", length = 100)
-    private String kod_pocztowy;
+    @Column(name = "kod_pocztowy", length = 100)
+    private String kodPocztowy;
     @Size(max = 100)
     @Column(name = "email", length = 100)
     private String email;
@@ -44,7 +44,7 @@ public class DaneKorespondencyjne {
             "id=" + id +
             ", ulica='" + ulica + '\'' +
             ", miejscowosc='" + miejscowosc + '\'' +
-            ", kod_pocztowy='" + kod_pocztowy + '\'' +
+            ", kod_pocztowy='" + kodPocztowy + '\'' +
             ", email='" + email + '\'' +
             ", telefon='" + telefon + '\'' +
             ", user=" + user +
@@ -83,13 +83,6 @@ public class DaneKorespondencyjne {
         this.miejscowosc = miejscowosc;
     }
 
-    public String getKod_pocztowy() {
-        return kod_pocztowy;
-    }
-
-    public void setKod_pocztowy(String kod_pocztowy) {
-        this.kod_pocztowy = kod_pocztowy;
-    }
 
     public String getEmail() {
         return email;
@@ -105,6 +98,13 @@ public class DaneKorespondencyjne {
 
     public void setTelefon(String telefon) {
         this.telefon = telefon;
+    }
+    public String getKodPocztowy() {
+        return kodPocztowy;
+    }
+
+    public void setKodPocztowy(String kodPocztowy) {
+        this.kodPocztowy = kodPocztowy;
     }
 
     public User getUser() {

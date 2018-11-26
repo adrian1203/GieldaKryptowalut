@@ -94,6 +94,78 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+    @OneToMany
+    private Set<DaneKorespondencyjne> daneKorespondencyjne;
+
+    @OneToMany
+    private Set<OfertaSprzedazy> ofertaSprzedazy;
+
+    @OneToMany
+    private  Set<OfertaZakupu> ofertaZakupus;
+
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", login='" + login + '\'' +
+            ", password='" + password + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", activated=" + activated +
+            ", langKey='" + langKey + '\'' +
+            ", imageUrl='" + imageUrl + '\'' +
+            ", activationKey='" + activationKey + '\'' +
+            ", resetKey='" + resetKey + '\'' +
+            ", resetDate=" + resetDate +
+            ", authorities=" + authorities +
+            ", daneKorespondencyjne=" + daneKorespondencyjne +
+            ", ofertaSprzedazy=" + ofertaSprzedazy +
+            ", ofertaZakupus=" + ofertaZakupus +
+            ", kontoBankowes=" + kontoBankowes +
+            '}';
+    }
+
+    public Set<DaneKorespondencyjne> getDaneKorespondencyjne() {
+        return daneKorespondencyjne;
+    }
+
+    public void setDaneKorespondencyjne(Set<DaneKorespondencyjne> daneKorespondencyjne) {
+        this.daneKorespondencyjne = daneKorespondencyjne;
+    }
+
+    public Set<OfertaSprzedazy> getOfertaSprzedazy() {
+        return ofertaSprzedazy;
+    }
+
+    public void setOfertaSprzedazy(Set<OfertaSprzedazy> ofertaSprzedazy) {
+        this.ofertaSprzedazy = ofertaSprzedazy;
+    }
+
+    public Set<OfertaZakupu> getOfertaZakupus() {
+        return ofertaZakupus;
+    }
+
+    public void setOfertaZakupus(Set<OfertaZakupu> ofertaZakupus) {
+        this.ofertaZakupus = ofertaZakupus;
+    }
+
+    public Set<KontoBankowe> getKontoBankowes() {
+        return kontoBankowes;
+    }
+
+    public void setKontoBankowes(Set<KontoBankowe> kontoBankowes) {
+        this.kontoBankowes = kontoBankowes;
+    }
+
+    @OneToMany
+    private Set<KontoBankowe> kontoBankowes;
+
+
+
+
+
+
 
     public Long getId() {
         return id;
@@ -218,17 +290,4 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return Objects.hashCode(getId());
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
-            "}";
-    }
 }

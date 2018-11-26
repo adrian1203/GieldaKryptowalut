@@ -23,7 +23,7 @@ public class KontoBankowe {
     @Column(name = "waluta",length =50 )
     private String waluta;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
 
@@ -45,16 +45,15 @@ public class KontoBankowe {
 
     @Override
     public String toString() {
-        return "KontoBankowe={" +
+        return "KontoBankowe{" +
             "id=" + id +
             ", numer='" + numer + '\'' +
-            ", stan_konta='" + stan_konta + '\'' +
+            ", stan_konta=" + stan_konta +
             ", waluta='" + waluta + '\'' +
+            ", user=" + user +
             '}';
     }
-
-
-    //Getters&Setters
+//Getters&Setters
 
     public Long getId() {
         return id;

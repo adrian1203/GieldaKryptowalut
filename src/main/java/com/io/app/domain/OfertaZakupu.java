@@ -22,7 +22,7 @@ public class OfertaZakupu {
     @Column(name = "waluta",length = 50)
     private String waluta;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
 
@@ -38,11 +38,12 @@ public class OfertaZakupu {
 
     @Override
     public String toString() {
-        return "OfertaZakupu={" +
+        return "OfertaZakupu{" +
             "id=" + id +
-            ", cena='" + cena + '\'' +
+            ", cena=" + cena +
             ", data_wystawienia='" + data_wystawienia + '\'' +
             ", waluta='" + waluta + '\'' +
+            ", user=" + user +
             '}';
     }
 
