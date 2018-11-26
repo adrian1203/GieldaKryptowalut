@@ -56,7 +56,8 @@ public class DaneKorespondencyjne {
         return id != null ? id.hashCode() : 0;
     }
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "jhi_user_id")
     private User user;
 
     public Long getId() {

@@ -24,6 +24,7 @@ public class KontoBankowe {
     private String waluta;
 
     @ManyToOne
+    @JoinColumn(name = "jhi_user_id")
     private User user;
 
 
