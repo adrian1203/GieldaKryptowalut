@@ -94,14 +94,18 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
-    @OneToMany
-    private Set<DaneKorespondencyjne> daneKorespondencyjne;
 
     @OneToMany
-    private Set<OfertaSprzedazy> ofertaSprzedazy;
+    private Set<DaneKorespondencyjne> daneKorespondencyjne= new HashSet<>();
 
     @OneToMany
-    private  Set<OfertaZakupu> ofertaZakupus;
+    private Set<OfertaSprzedazy> ofertaSprzedazy = new HashSet<>();;
+
+    @OneToMany
+    private  Set<OfertaZakupu> ofertaZakupus = new HashSet<>();;
+
+    @OneToMany
+    private Set<KontoBankowe> kontoBankowes = new HashSet<>();;
 
     @Override
     public String toString() {
@@ -119,10 +123,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", resetKey='" + resetKey + '\'' +
             ", resetDate=" + resetDate +
             ", authorities=" + authorities +
-            ", daneKorespondencyjne=" + daneKorespondencyjne +
-            ", ofertaSprzedazy=" + ofertaSprzedazy +
-            ", ofertaZakupus=" + ofertaZakupus +
-            ", kontoBankowes=" + kontoBankowes +
+//            ", ofertaSprzedazy=" + ofertaSprzedazy +
+//            ", daneKorespondencyjne=" + daneKorespondencyjne +
+//            ", ofertaZakupus=" + ofertaZakupus +
+//            ", kontoBankowes=" + kontoBankowes +
             '}';
     }
 
@@ -158,8 +162,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.kontoBankowes = kontoBankowes;
     }
 
-    @OneToMany
-    private Set<KontoBankowe> kontoBankowes;
+
 
 
 
