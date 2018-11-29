@@ -6,7 +6,8 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181120134100_initial_schema_GK.sql" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/26112018210300_fix_bugs_inDB.sql" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181126210300_fix_bugs_inDB.sql" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181130002900_add_typ_zlecenie_in_table.sql" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
