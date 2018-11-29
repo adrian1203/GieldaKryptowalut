@@ -21,6 +21,7 @@ import org.bitcoinj.wallet.listeners.WalletCoinsReceivedEventListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.InetAddress;
 import java.security.SecureRandom;
 import java.util.concurrent.Executors;
@@ -30,10 +31,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class CryptocService {
 
-    private static Address forwardingAddress;
-    private static WalletAppKit kit;
+    /*
+    * Info about creating and sending btc in regtest (and in other but especially in regtest):
+    * We can send first BTC to our wallet from cmd or powerShell, steps to do:
+    * 1) bitcoind -regtest  => start regtest instance of bitcoin in backgroun, new terminal needs to be open!!!
+    * 2) bitcoin-cli -regtest generate 101   => generate 101 blocks, your wallet gets immadetialy 50BTC reward
+    * 3) bitcoin-cli -regtest getbalance   => check balance of account
+    * 4) bitcoin-cli -regtest sendtoadress "ADRESS_FROM_HERE" X    => where X is amount of mBTC and "ADD.." is adress from GetWalletAdress()
+    * The most important - each of us should work only on his own geenrated wallet, because each of us has own and different
+    * blockchain generated! So in main() change "kuba" to for example "adrian" or "jan" or "kamil"!
+    *
+    * NOTE: After SendToAddress(..) you have to confirm transaction in shell by typing:
+    * bitcoin-cli -regtest generate 1
+    */
 
 
+    /* Load wallet from name, if doesn't exist create new one */
     public Wallet LoadWallet(String username, NetworkParameters netParams){
 
         Wallet wallet = null;
@@ -45,7 +58,7 @@ public class CryptocService {
 
             if(walletFile.exists())
             {
-                wallet = wallet.loadFromFile(walletFile);
+                wallet = Wallet.loadFromFile(walletFile);
                 System.out.println("Wallet loaded!");
             }
             else
@@ -61,7 +74,7 @@ public class CryptocService {
         return wallet;
     }
 
-    /* GetWalletAdress*/
+    /* Get current adress of wallet*/
     public String GetWalletAdress(String username,NetworkParameters netParams){
         Wallet wallet = LoadWallet(username,netParams);
         String adress  = wallet.currentAddress(KeyChain.KeyPurpose.RECEIVE_FUNDS).toString();
@@ -69,14 +82,15 @@ public class CryptocService {
         return adress;
     }
 
-    /* GetWalletBalance */
+    /* Get balance of current wallet */
     public long GetWalletBalance(String username, NetworkParameters netParams){
         Wallet wallet = LoadWallet(username,netParams);
         long value = wallet.getBalance().value;
-        System.out.println("WALLET COINS: " + value + " mBTC");
+        System.out.println("WALLET COINS: " + value + " satoshi (1TBC=100'000'000satoshi)");
         return value;
     }
 
+    /* Save current state of wallet */
     public void SaveWallet(Wallet wallet, String username){
         final File walletFile = new File("wallets/"+username+".wallet");
 
@@ -87,6 +101,7 @@ public class CryptocService {
         }
     }
 
+    /* Refresh wallet from net and save to file updated wallet state */
     public void RefreshWallet(Wallet wallet,NetworkParameters netparams, String nickname){
 
         System.out.println("START REFRESH...");
@@ -123,98 +138,37 @@ public class CryptocService {
 
     }
 
+    /* Send bitcoins to address */
+    public void SendToAdress(Wallet wallet,String username, NetworkParameters netParams,long amountToSend,String recipient){
 
-    ////------------------------///
+        BlockStore blockStore = new MemoryBlockStore(netParams);
+        Coin coins = Coin.valueOf(amountToSend);
 
-    public void Wallet(){
-
-        // Figure out which network we should connect to. Each one gets its own set of files.
-        NetworkParameters params = RegTestParams.get();
-        String filePrefix = "forwarding-service-regtest";
-
-        // Parse the address given as the first parameter.
-        forwardingAddress = Address.fromBase58(params, "mySnxjrChcpmquYsxnbRtFqSuNDeyW1Cyb");
-
-
-        System.out.println("Network: " + params.getId());
-        System.out.println("Forwarding address: " + forwardingAddress);
-
-        // Start up a basic app using a class that automates some boilerplate.
-        kit = new WalletAppKit(params, new File("."), filePrefix);
-
-        if (params == RegTestParams.get()) {
-            // Regression test mode is designed for testing and development only, so there's no public network for it.
-            // If you pick this mode, you're expected to be running a local "bitcoind -regtest" instance.
-            kit.connectToLocalHost();
-        }
-
-        // Download the block chain and wait until it's done.
-        kit.startAsync();
-        kit.awaitRunning();
-
-        // We want to know when we receive money.
-        kit.wallet().addCoinsReceivedEventListener(new WalletCoinsReceivedEventListener() {
-            @Override
-            public void onCoinsReceived(Wallet w, Transaction tx, Coin prevBalance, Coin newBalance) {
-                // Runs in the dedicated "user thread" (see bitcoinj docs for more info on this).
-                //
-                // The transaction "tx" can either be pending, or included into a block (we didn't see the broadcast).
-                Coin value = tx.getValueSentToMe(w);
-                System.out.println("Received tx for " + value.toFriendlyString() + ": " + tx);
-                System.out.println("Transaction will be forwarded after it confirms.");
-                // Wait until it's made it into the block chain (may run immediately if it's already there).
-                //
-                // For this dummy app of course, we could just forward the unconfirmed transaction. If it were
-                // to be double spent, no harm done. Wallet.allowSpendingUnconfirmedTransactions() would have to
-                // be called in onSetupCompleted() above. But we don't do that here to demonstrate the more common
-                // case of waiting for a block.
-                Futures.addCallback(tx.getConfidence().getDepthFuture(1), new FutureCallback<TransactionConfidence>() {
-                    @Override
-                    public void onSuccess(TransactionConfidence result) {
-                        forwardCoins(tx);
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-                        // This kind of future can't fail, just rethrow in case something weird happens.
-                        throw new RuntimeException(t);
-                    }
-                });
-            }
-        });
-
-        Address sendToAddress = kit.wallet().currentReceiveKey().toAddress(params);
-        System.out.println("Send coins to: " + sendToAddress);
-        System.out.println("Waiting for coins to arrive. Press Ctrl-C to quit.");
+        BlockChain chain = null;
 
         try {
-            Thread.sleep(Long.MAX_VALUE);
-        } catch (InterruptedException ignored) {}
+             chain = new BlockChain(netParams, wallet, blockStore);
+        } catch (BlockStoreException e) {
+            System.out.println("Blockstore exception in sendToAddress!");
+        }
+
+        final PeerGroup peerGroup = new PeerGroup(netParams, chain);
+        peerGroup.startAsync();
+
+        Address recipientAddress = new Address(netParams, recipient);
+
+        try{
+            Wallet.SendResult sendResult = wallet.sendCoins(peerGroup,recipientAddress,coins);
+            checkNotNull(sendResult);
+        } catch (InsufficientMoneyException e) {
+            System.out.println("You don't have enough satoshii in wallet!");
+        }
+
+        peerGroup.downloadBlockChain();
+        peerGroup.stopAsync();
+        SaveWallet(wallet,username);
+        System.out.println("Send oparation success!");
     }
 
-    private static void forwardCoins(Transaction tx) {
-        try {
-            Coin value = tx.getValueSentToMe(kit.wallet());
-            System.out.println("Forwarding " + value.toFriendlyString());
-            // Now send the coins back! Send with a small fee attached to ensure rapid confirmation.
-            final Coin amountToSend = value.subtract(Transaction.REFERENCE_DEFAULT_MIN_TX_FEE);
-            final Wallet.SendResult sendResult = kit.wallet().sendCoins(kit.peerGroup(), forwardingAddress, amountToSend);
-            checkNotNull(sendResult);  // We should never try to send more coins than we have!
-            System.out.println("Sending ...");
-            // Register a callback that is invoked when the transaction has propagated across the network.
-            // This shows a second style of registering ListenableFuture callbacks, it works when you don't
-            // need access to the object the future returns.
-            sendResult.broadcastComplete.addListener(new Runnable() {
-                @Override
-                public void run() {
-                    // The wallet has changed now, it'll get auto saved shortly or when the app shuts down.
-                    System.out.println("Sent coins onwards! Transaction hash is " + sendResult.tx.getHashAsString());
-                }
-            }, SameThreadExecutor.INSTANCE);
-        } catch (KeyCrypterException | InsufficientMoneyException e) {
-            // We don't use encrypted wallets in this example - can never happen.
-            throw new RuntimeException(e);
-        }
-    }
 
 }
