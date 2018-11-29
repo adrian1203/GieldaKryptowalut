@@ -11,14 +11,6 @@
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->
-        <repository>
-            <id>api-v1-client-java-mvn-repo</id>
-            <url>https://raw.githubusercontent.com/blockchain/api-v1-client-java/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
     </repositories>
 
     <!-- jhipster-needle-distribution-management -->
@@ -122,9 +114,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>info.blockchain</groupId>
-            <artifactId>api</artifactId>
-            <version>LATEST</version>
+            <groupId>org.bitcoinj</groupId>
+            <artifactId>bitcoinj-core</artifactId>
+            <version>0.14.7</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
