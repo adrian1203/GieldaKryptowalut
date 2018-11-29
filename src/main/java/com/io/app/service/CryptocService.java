@@ -61,9 +61,20 @@ public class CryptocService {
         return wallet;
     }
 
-    /* Divide to GetWalletAdress and GetWalletBalance */
-    public void GetWalletInfo(String username,NetworkParameters netParams){
-        System.out.println("WALLET INFO: "+LoadWallet(username,netParams));
+    /* GetWalletAdress*/
+    public String GetWalletAdress(String username,NetworkParameters netParams){
+        Wallet wallet = LoadWallet(username,netParams);
+        String adress  = wallet.currentAddress(KeyChain.KeyPurpose.RECEIVE_FUNDS).toString();
+        System.out.println("WALLET ADRESS: "+ adress);
+        return adress;
+    }
+
+    /* GetWalletBalance */
+    public long GetWalletBalance(String username, NetworkParameters netParams){
+        Wallet wallet = LoadWallet(username,netParams);
+        long value = wallet.getBalance().value;
+        System.out.println("WALLET COINS: " + value + " mBTC");
+        return value;
     }
 
     public void SaveWallet(Wallet wallet, String username){
@@ -111,6 +122,7 @@ public class CryptocService {
         System.out.println(wallet.toString());
 
     }
+
 
     ////------------------------///
 
