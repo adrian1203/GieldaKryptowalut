@@ -6,6 +6,6 @@ services:
         #     - ~/volumes/jhipster/GieldaKryptowalut/postgresql/:/var/lib/postgresql/data/
         environment:
             - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_PASSWORD=admin
         ports:
             - 5432:5432

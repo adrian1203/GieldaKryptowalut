@@ -3,9 +3,13 @@ package com.io.app;
 import com.io.app.config.ApplicationProperties;
 import com.io.app.config.DefaultProfileUtil;
 
+import com.io.app.domain.Cryptoc;
+import com.io.app.service.CryptocService;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bitcoinj.params.RegTestParams;
+import org.bitcoinj.wallet.Wallet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -64,6 +68,13 @@ public class GieldaKryptowalutApp {
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
+
+        //Testing cryptoc
+        CryptocService ss = new CryptocService();
+        //ss.Wallet();
+        Wallet wallet = ss.LoadWallet("kuba",RegTestParams.get());
+        //ss.RefreshWallet(wallet,RegTestParams.get(),"kuba");
+        ss.GetWalletInfo("kuba",RegTestParams.get());
     }
 
     private static void logApplicationStartup(Environment env) {
