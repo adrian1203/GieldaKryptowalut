@@ -163,13 +163,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     }
 
 
-
-
-
-
-
-
-
     public Long getId() {
         return id;
     }
