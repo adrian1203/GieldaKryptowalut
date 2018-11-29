@@ -73,9 +73,10 @@ public class GieldaKryptowalutApp {
         CryptocService ss = new CryptocService();
         //ss.Wallet();
         Wallet wallet = ss.LoadWallet("kuba",RegTestParams.get());
-        ss.RefreshWallet(wallet,RegTestParams.get(),"kuba");
-        //ss.GetWalletInfo("kuba",RegTestParams.get());
+        //ss.RefreshWallet(wallet,RegTestParams.get(),"kuba");
+        //ss.GetWalletAdress("kuba",RegTestParams.get());
         ss.GetWalletBalance("kuba",RegTestParams.get());
+        //ss.SendToAdress(wallet,"kuba",RegTestParams.get(),100000000,"mpXYYDTMruK5ZJNZ85mKjtjCyRm3CnMQBj");
     }
 
     private static void logApplicationStartup(Environment env) {
