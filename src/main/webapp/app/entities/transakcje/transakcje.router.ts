@@ -1,11 +1,11 @@
 import { Routes, RouterModule, Route } from '@angular/router';
 
 import { NgModule } from '../../../../../../node_modules/@angular/core';
-import { KupnoSprzedazComponent } from './kupno-sprzedaz.component';
+import { TransakcjeComponent } from './transakcje.component';
 
-export const KupnoSprzedazRouter: Route = {
-    path: 'kupno-sprzedaz',
-    component: KupnoSprzedazComponent
+export const TransakcjeRouter: Route = {
+    path: 'transakcje',
+    component: TransakcjeComponent
 };
 // @NgModule({
 //     imports: [RouterModule.forRoot(routes)],

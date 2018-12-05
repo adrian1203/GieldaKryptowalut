@@ -5,6 +5,9 @@ import { MojeKontoComponent } from './moje-konto/moje-konto.component';
 import { GieldaKryptowalutSharedModule } from '../shared/shared.module';
 import { entitiesState } from './entity.route';
 import { KupnoSprzedazComponent } from './kupno-sprzedaz/kupno-sprzedaz.component';
+import { StatystykiComponent } from './statystyki/statystyki.component';
+import { TransakcjeComponent } from './transakcje/transakcje.component';
+import { OfertyGieldaComponent } from './oferty-gielda/oferty-gielda.component';
 //import {entitiesState} from "./entity.route";
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
@@ -17,7 +20,7 @@ import { KupnoSprzedazComponent } from './kupno-sprzedaz/kupno-sprzedaz.componen
 
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
-    declarations: [MojeKontoComponent, KupnoSprzedazComponent],
+    declarations: [MojeKontoComponent, KupnoSprzedazComponent, StatystykiComponent, TransakcjeComponent, OfertyGieldaComponent],
     entryComponents: [],
     providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
