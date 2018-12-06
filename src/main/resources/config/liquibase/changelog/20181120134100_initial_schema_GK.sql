@@ -30,7 +30,7 @@ CREATE TABLE konto_bankowe (
 CREATE TABLE oferta_sprzedazy (
     id int  NOT NULL,
     cena real  NOT NULL,
-    data_wystawienia timestamp  NOT NULL,
+    dataWystawienia timestamp  NOT NULL,
     waluta varchar(50)  NOT NULL,
     jhi_user_id int  NOT NULL,
     CONSTRAINT oferta_sprzedazy_pk PRIMARY KEY (id)
@@ -40,7 +40,7 @@ CREATE TABLE oferta_sprzedazy (
 CREATE TABLE oferta_zakupu (
     id int  NOT NULL,
     cena real  NOT NULL,
-    data_wystawienia timestamp  NOT NULL,
+    dataWystawienia timestamp  NOT NULL,
     waluta varchar(50)  NOT NULL,
     jhi_user_id int  NOT NULL,
     CONSTRAINT oferta_zakupu_pk PRIMARY KEY (id)

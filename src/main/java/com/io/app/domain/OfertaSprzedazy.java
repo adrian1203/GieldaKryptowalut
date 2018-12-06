@@ -15,12 +15,21 @@ public class OfertaSprzedazy {
 
     @Column(name = "cena")
     private double cena;
+    @Column(name = "ilosc")
+    private Integer ilosc;
+    @Column(name = "pozostala_ilosc")
+    private Integer pozostalaIlosc;
     @Size(max = 10)
-    @Column(name = "data_wystawienia", length = 10)
-    private String data_wystawienia;
+    @Column(name = "dataWystawienia", length = 10)
+    private String dataWystawienia;
     @Size(max = 50)
     @Column(name = "waluta",length = 50)
     private String waluta;
+    @Size(max = 50)
+    @Column(name = "typ_zlecenia",length = 50)
+    private String typZlecenia;
+
+
 
     @ManyToOne
     @JoinColumn(name = "jhi_user_id")
@@ -42,10 +51,29 @@ public class OfertaSprzedazy {
         return "OfertaSprzedazy{" +
             "id=" + id +
             ", cena=" + cena +
-            ", data_wystawienia='" + data_wystawienia + '\'' +
+            ", ilosc=" + ilosc +
+            ", pozostalaIlosc=" + pozostalaIlosc +
+            ", dataWystawienia='" + dataWystawienia + '\'' +
             ", waluta='" + waluta + '\'' +
+            ", typZlecenia='" + typZlecenia + '\'' +
             ", user=" + user +
             '}';
+    }
+
+    public Integer getIlosc() {
+        return ilosc;
+    }
+
+    public void setIlosc(Integer ilosc) {
+        this.ilosc = ilosc;
+    }
+
+    public Integer getPozostalaIlosc() {
+        return pozostalaIlosc;
+    }
+
+    public void setPozostalaIlosc(Integer pozostalaIlosc) {
+        this.pozostalaIlosc = pozostalaIlosc;
     }
 
     public Long getId() {
@@ -64,12 +92,12 @@ public class OfertaSprzedazy {
         this.cena = cena;
     }
 
-    public String getData_wystawienia() {
-        return data_wystawienia;
+    public String getDataWystawienia() {
+        return dataWystawienia;
     }
 
-    public void setData_wystawienia(String data_wystawienia) {
-        this.data_wystawienia = data_wystawienia;
+    public void setDataWystawienia(String dataWystawienia) {
+        this.dataWystawienia = dataWystawienia;
     }
 
     public String getWaluta() {
@@ -86,5 +114,12 @@ public class OfertaSprzedazy {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    public String getTypZlecenia() {
+        return typZlecenia;
+    }
+
+    public void setTypZlecenia(String typZlecenia) {
+        this.typZlecenia = typZlecenia;
     }
 }

@@ -15,12 +15,21 @@ public class OfertaZakupu {
 
     @Column(name = "cena")
     private double cena;
+    @Column(name = "ilosc")
+    private Integer ilosc;
+    @Column(name = "pozostala_ilosc")
+    private Integer pozostalaIlosc;
     @Size(min=10,max = 10)
-    @Column(name = "data_wystawienia", length = 10)
-    private String data_wystawienia;
+    @Column(name = "dataWystawienia", length = 10)
+    private String dataWystawienia;
     @Size(max = 50)
     @Column(name = "waluta",length = 50)
     private String waluta;
+    @Size(max = 50)
+    @Column(name = "typ_zlecenia",length = 50)
+    private String typZlecenia;
+
+
 
     @ManyToOne
     @JoinColumn(name = "jhi_user_id")
@@ -42,13 +51,14 @@ public class OfertaZakupu {
         return "OfertaZakupu{" +
             "id=" + id +
             ", cena=" + cena +
-            ", data_wystawienia='" + data_wystawienia + '\'' +
+            ", ilosc=" + ilosc +
+            ", pozostalaIlosc=" + pozostalaIlosc +
+            ", dataWystawienia='" + dataWystawienia + '\'' +
             ", waluta='" + waluta + '\'' +
+            ", typZlecenia='" + typZlecenia + '\'' +
             ", user=" + user +
             '}';
     }
-
-
     public Long getId() {
         return id;
     }
@@ -65,12 +75,12 @@ public class OfertaZakupu {
         this.cena = cena;
     }
 
-    public String getData_wystawienia() {
-        return data_wystawienia;
+    public String getDataWystawienia() {
+        return dataWystawienia;
     }
 
-    public void setData_wystawienia(String data_wystawienia) {
-        this.data_wystawienia = data_wystawienia;
+    public void setDataWystawienia(String dataWystawienia) {
+        this.dataWystawienia = dataWystawienia;
     }
 
     public String getWaluta() {
@@ -89,4 +99,27 @@ public class OfertaZakupu {
         this.user = user;
     }
 
+    public Integer getPozostalaIlosc() {
+        return pozostalaIlosc;
+    }
+
+    public void setPozostalaIlosc(Integer pozostalaIlosc) {
+        this.pozostalaIlosc = pozostalaIlosc;
+    }
+
+    public Integer getIlosc() {
+        return ilosc;
+    }
+
+    public void setIlosc(Integer ilosc) {
+        this.ilosc = ilosc;
+    }
+
+    public String getTypZlecenia() {
+        return typZlecenia;
+    }
+
+    public void setTypZlecenia(String typZlecenia) {
+        this.typZlecenia = typZlecenia;
+    }
 }

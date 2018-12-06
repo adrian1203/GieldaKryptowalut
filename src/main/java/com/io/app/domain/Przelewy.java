@@ -13,22 +13,35 @@ public class Przelewy {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Size(min=10,max = 10)
+    @Size(min = 10, max = 10)
     @Column(name = "data", length = 10)
     private String data;
     @Column(name = "wartosc")
     private double wartosc;
-    @Size(min = 1,max = 50)
-    @Column(name = "waluta",length = 50)
+    @Size(min = 1, max = 50)
+    @Column(name = "waluta", length = 50)
     private String waluta;
     @Size(min = 26, max = 26)
-    @Column(name="na_konto_bankowe_id",length = 26)
+    @Column(name = "na_konto_bankowe_id", length = 26)
     private String na_konto_bankowe_id;
     @Size(min = 26, max = 26)
-    @Column(name="z_konto_bankowe_id",length = 26)
+    @Column(name = "z_konto_bankowe_id", length = 26)
     private String z_konto_bankowe_id;
+    @Column(name = "ilosc")
+    private Integer ilosc;
 
-
+    @Override
+    public String toString() {
+        return "Przelewy{" +
+            "id=" + id +
+            ", data='" + data + '\'' +
+            ", wartosc=" + wartosc +
+            ", waluta='" + waluta + '\'' +
+            ", na_konto_bankowe_id='" + na_konto_bankowe_id + '\'' +
+            ", z_konto_bankowe_id='" + z_konto_bankowe_id + '\'' +
+            ", ilosc=" + ilosc +
+            '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -38,19 +51,6 @@ public class Przelewy {
         Przelewy that = (Przelewy) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Przelewy={" +
-            "id=" + id +
-            ", data='" + data + '\'' +
-            ", wartosc='" + wartosc + '\'' +
-            ", waluta='" + waluta + '\'' +
-            ", na_konto_bankowe_id='" + na_konto_bankowe_id + '\''+
-            ", z_konto_bankowe_id='" + z_konto_bankowe_id + '\''+
-            '}';
     }
 
 
@@ -102,4 +102,11 @@ public class Przelewy {
         this.z_konto_bankowe_id = z_konto_bankowe_id;
     }
 
+    public Integer getIlosc() {
+        return ilosc;
+    }
+
+    public void setIlosc(Integer ilosc) {
+        this.ilosc = ilosc;
+    }
 }
