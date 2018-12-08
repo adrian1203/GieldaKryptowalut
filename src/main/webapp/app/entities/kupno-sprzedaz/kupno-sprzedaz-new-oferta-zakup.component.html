@@ -14,8 +14,9 @@
                 <div class="form-group" >
                     <label></label>Typ zlecenia</label>
                     <select class="form-control" id="langKey" name="langKey" [(ngModel)]="ofertaZakupu.typZlecenia">
-                        <option value="PKC">PKC</option>
                         <option value="NORMAL">Z limitem ceny</option>
+
+                        <option value="PKC">PKC</option>
                     </select>
                 </div>
                 <div class="form-group" *ngIf="ofertaZakupu.typZlecenia=='NORMAL'" >

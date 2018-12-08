@@ -1,9 +1,9 @@
 package com.io.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.io.app.domain.OfertaSprzedazy;
 import com.io.app.domain.OfertaZakupu;
 import com.io.app.service.OfertaZakupuService;
+import com.io.app.service.ZrealizowaneZleceniaService;
 import com.io.app.web.rest.util.PaginationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,15 +20,18 @@ import java.util.List;
 public class OfertaZakupuResource {
 
     private final OfertaZakupuService ofertaZakupuService;
+    private final ZrealizowaneZleceniaService zrealizowaneZleceniaService;
 
-    public OfertaZakupuResource(OfertaZakupuService ofertaZakupuService) {
+    public OfertaZakupuResource(OfertaZakupuService ofertaZakupuService, ZrealizowaneZleceniaService zrealizowaneZleceniaService) {
         this.ofertaZakupuService = ofertaZakupuService;
+        this.zrealizowaneZleceniaService = zrealizowaneZleceniaService;
     }
     @PostMapping("/save")
     @Timed
     public ResponseEntity<OfertaZakupu> createOfertaZakupu(@RequestBody  OfertaZakupu ofertaZakupu) {
-
-        return ResponseEntity.ok(this.ofertaZakupuService.createOfertaZakupu(ofertaZakupu));
+        ResponseEntity rs =ResponseEntity.ok(this.ofertaZakupuService.createOfertaZakupu(ofertaZakupu));
+        this.zrealizowaneZleceniaService.wykonajTransakcje();
+        return rs;
 
     }
     @GetMapping("findAll")

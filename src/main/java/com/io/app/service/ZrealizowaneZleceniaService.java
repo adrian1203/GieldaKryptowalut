@@ -58,7 +58,7 @@ public class ZrealizowaneZleceniaService {
         this.zrealizowaneZleceniaRepository.save(zrealizowaneZlecenia);
     }
 
-    public void KupnoPKC(){
+    public void kupnoPKC(){
         List<OfertaZakupu> ofertyZakupuPCK=this.ofertaZakupuService.getOfertyZakupuPCK();
         ofertyZakupuPCK.forEach((ofertaZakupu -> {
             List<OfertaSprzedazy> ofertaSprzedazies=this.ofertaSprzedazyService.getOfertySprzedazyLIMIT();
@@ -76,7 +76,7 @@ public class ZrealizowaneZleceniaService {
         }));
 
     }
-    public void SprzedazPKC(){
+    public void sprzedazPKC(){
         List<OfertaSprzedazy> ofertySprzedazyPKC=this.ofertaSprzedazyService.getOfertySprzedazyPKC();
 
         ofertySprzedazyPKC.forEach(ofertaSprzedazy -> {
@@ -92,6 +92,10 @@ public class ZrealizowaneZleceniaService {
             });
         });
 
+    }
 
+    public void wykonajTransakcje(){
+        this.sprzedazPKC();
+        this.kupnoPKC();
     }
 }
