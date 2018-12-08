@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="myUserLabel">
+                Dodaj ofertę zakupu
+            </h2>
+            <div>
+                <div class="form-group">
+                    <label class="form-control-label">Cena</label>
+                    <input pattern="\d*" type="text" class="form-control" name="firstName" #firstNameInput="ngModel"
+                           [(ngModel)]="ofertaZakupu.cena" maxlength="50" required>
+                </div>
+                <div class="form-group">
+                    <label>ilość</label>
+                    <input type="text"  pattern="\d*" class="form-control" name="lastName" #lastNameInput="ngModel"
+                           [(ngModel)]="ofertaZakupu.ilosc" maxlength="50" required>
+                </div>
+                <div class="form-group" >
+                    <label></label>Typ zlecenia</label>
+                    <select class="form-control" id="langKey" name="langKey" [(ngModel)]="ofertaZakupu.typZlecenia">
+                        <option value="PKC" > PKC</option>
+                        <option value="NORMAL">Normalna</option>
+                    </select>
+                </div>
+
+            <div> 
+                <button type="button" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
+                    >Cancel</span>
+                </button>
+                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span >Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

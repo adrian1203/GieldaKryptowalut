@@ -8,6 +8,11 @@ import { KupnoSprzedazComponent } from './kupno-sprzedaz/kupno-sprzedaz.componen
 import { StatystykiComponent } from './statystyki/statystyki.component';
 import { TransakcjeComponent } from './transakcje/transakcje.component';
 import { OfertyGieldaComponent } from './oferty-gielda/oferty-gielda.component';
+import { OfertyGieldaZakupComponent } from './oferty-gielda-zakup/oferty-gielda-zakup.component';
+import { KupnoSprzedazNewOfertaZakupComponent } from './kupno-sprzedaz/kupno-sprzedaz-new-oferta-zakup.component';
+import { KupnoSprzedazNewOfertaSprzedazComponent } from './kupno-sprzedaz/kupno-sprzedaz-new-oferta-sprzedaz.component';
+import { OfertySprzedazComponent } from './kupno-sprzedaz/oferty-sprzedaz.component';
+import { OfertyZakupComponent } from './kupno-sprzedaz/oferty-zakup.component';
 //import {entitiesState} from "./entity.route";
 
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
@@ -20,7 +25,18 @@ import { OfertyGieldaComponent } from './oferty-gielda/oferty-gielda.component';
 
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
-    declarations: [MojeKontoComponent, KupnoSprzedazComponent, StatystykiComponent, TransakcjeComponent, OfertyGieldaComponent],
+    declarations: [
+        MojeKontoComponent,
+        KupnoSprzedazComponent,
+        StatystykiComponent,
+        TransakcjeComponent,
+        OfertyGieldaComponent,
+        OfertyGieldaZakupComponent,
+        KupnoSprzedazNewOfertaZakupComponent,
+        KupnoSprzedazNewOfertaSprzedazComponent,
+        OfertySprzedazComponent,
+        OfertyZakupComponent
+    ],
     entryComponents: [],
     providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { OfertyGieldaService } from './oferty-gielda.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { OfertaSprzedazy } from './oferty-gielda.model';
-import { ITEMS_PER_PAGE } from 'app/shared';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
-import { Principal } from 'app/core';
+import { OfertaZakupu } from './oferty-gielda-zakup.model';
+import { OfertyGieldaZakupService } from './oferty-gielda-zakup.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
+import { Principal } from '../../core/auth/principal.service';
+import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { HttpResponse } from '@angular/common/http';
 
 @Component({
-    selector: 'jhi-oferty-gielda',
-    templateUrl: './oferty-gielda.component.html',
+    selector: 'jhi-oferty-gielda-zakup',
+    templateUrl: './oferty-gielda-zakup.component.html',
     styles: []
 })
-export class OfertyGieldaComponent implements OnInit {
+export class OfertyGieldaZakupComponent implements OnInit {
     currentAccount: any;
-    ofertaSprzedazys: OfertaSprzedazy[];
+    ofertaZakupus: OfertaZakupu[];
     error: any;
     success: any;
     routeData: any;
@@ -27,7 +27,7 @@ export class OfertyGieldaComponent implements OnInit {
     previousPage: any;
     reverse: any;
     constructor(
-        private ofertyGieldaService: OfertyGieldaService,
+        private ofertyGieldaZakupService: OfertyGieldaZakupService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private alertService: JhiAlertService,
@@ -47,19 +47,19 @@ export class OfertyGieldaComponent implements OnInit {
         this.page = 1;
         this.loadAllOfertaSprzedazy();
     }
-    trackIdentity(index, item: OfertaSprzedazy) {
+    trackIdentity(index, item: OfertaZakupu) {
         return item.id;
     }
 
     loadAllOfertaSprzedazy() {
-        this.ofertyGieldaService
-            .queryOfertySprzedazy({
+        this.ofertyGieldaZakupService
+            .queryOfertyZakupu({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<OfertaSprzedazy[]>) => this.onSuccess(res.body, res.headers),
+                (res: HttpResponse<OfertaZakupu[]>) => this.onSuccess(res.body, res.headers),
                 (res: HttpResponse<any>) => this.onError(res.body)
             );
     }
@@ -69,7 +69,7 @@ export class OfertyGieldaComponent implements OnInit {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
-        this.ofertaSprzedazys = data;
+        this.ofertaZakupus = data;
     }
 
     private onError(error) {

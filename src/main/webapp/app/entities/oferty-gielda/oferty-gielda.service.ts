@@ -16,4 +16,9 @@ export class OfertyGieldaService {
         const options = createRequestOption(req);
         return this.http.get<OfertaSprzedazy[]>(this.resourceUrl + `oferty-sprzedazys`, { params: options, observe: 'response' });
     }
+
+    queryUserOfertySprzedazy(req?: any): Observable<HttpResponse<OfertaSprzedazy[]>> {
+        const options = createRequestOption(req);
+        return this.http.get<OfertaSprzedazy[]>(this.resourceUrl + `user-oferty-sprzedazys`, { params: options, observe: 'response' });
+    }
 }

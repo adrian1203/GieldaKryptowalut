@@ -1,7 +1,7 @@
 import { Data } from '@angular/router';
 import { User } from 'app/core';
 
-export class OfertaSprzedazy {
+export class OfertaZakupu {
     constructor(
         public id?: number,
         public dataWystawienia?: Date,

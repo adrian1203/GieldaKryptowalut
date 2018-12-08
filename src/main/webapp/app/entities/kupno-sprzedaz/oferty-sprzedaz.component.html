@@ -1,8 +1,8 @@
 <p>
-  Oferty Sprzedaży
+  Moje Oferty Sprzedaży
 
-<button class="btn btn-primary float-right jh-create-entity"  [routerLink]="['../oferty-gielda-zakup']" >
-         <span>Pokaż oferty kupna</span>
+<button class="btn btn-primary float-right jh-create-entity"  [routerLink]="['../kupno-oferty']" >
+         <span>Pokaż moje oferty kupna</span>
 </button>
 </p>
 <div>
@@ -27,7 +27,7 @@
             <td>{{oferta.typZlecenia}}</td>
             <td>{{oferta.pozostalaIlosc}}</td>
             <td>{{oferta.ilosc}}</td>
-           
+
         </tr>
         </tbody>
     </table>
@@ -40,7 +40,7 @@
                 <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
             </div>
         </div>
-    
+
 </div>
 <div>
     <div class="table-responsive" *ngIf="ofertaKupnas">
@@ -65,7 +65,7 @@
             <td>{{oferta.typZlecenia}}</td>
             <td>{{oferta.pozostalaIlosc}}</td>
             <td>{{oferta.ilosc}}</td>
-           
+
         </tr>
         </tbody>
     </table>
@@ -78,5 +78,5 @@
                 <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
             </div>
         </div>
-    
+
 </div>

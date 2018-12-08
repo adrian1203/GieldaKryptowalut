@@ -23,10 +23,18 @@
                 <a class="nav-link" routerLink="oferty-gielda" (click)="collapseNavbar()">
                     <span>
                         <fa-icon [icon]="'home'"></fa-icon>
-                        <span>Oferty na gieldzie</span>
+                        <span>Oferty sprzedaży gieldzie</span>
                     </span>
                 </a>
             </li>
+            <li   class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="oferty-gielda-zakup" (click)="collapseNavbar()">
+                        <span>
+                            <fa-icon [icon]="'home'"></fa-icon>
+                            <span>Oferty zakupu gieldzie</span>
+                        </span>
+                    </a>
+                </li>
             
             <li  *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="kupno-sprzedaz" (click)="collapseNavbar()">

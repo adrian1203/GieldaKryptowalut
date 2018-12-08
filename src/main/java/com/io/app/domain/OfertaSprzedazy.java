@@ -2,6 +2,7 @@ package com.io.app.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 
 @Entity
@@ -19,9 +20,8 @@ public class OfertaSprzedazy {
     private Integer ilosc;
     @Column(name = "pozostala_ilosc")
     private Integer pozostalaIlosc;
-    @Size(max = 10)
-    @Column(name = "dataWystawienia", length = 10)
-    private String dataWystawienia;
+    @Column(name = "datawystawienia", length = 10)
+    private Date dataWystawienia;
     @Size(max = 50)
     @Column(name = "waluta",length = 50)
     private String waluta;
@@ -44,20 +44,6 @@ public class OfertaSprzedazy {
         OfertaSprzedazy that = (OfertaSprzedazy)obj;
 
         return id != null ? id.equals(that.id) : that.id == null;
-    }
-
-    @Override
-    public String toString() {
-        return "OfertaSprzedazy{" +
-            "id=" + id +
-            ", cena=" + cena +
-            ", ilosc=" + ilosc +
-            ", pozostalaIlosc=" + pozostalaIlosc +
-            ", dataWystawienia='" + dataWystawienia + '\'' +
-            ", waluta='" + waluta + '\'' +
-            ", typZlecenia='" + typZlecenia + '\'' +
-            ", user=" + user +
-            '}';
     }
 
     public Integer getIlosc() {
@@ -92,11 +78,24 @@ public class OfertaSprzedazy {
         this.cena = cena;
     }
 
-    public String getDataWystawienia() {
+    public Date getDataWystawienia() {
         return dataWystawienia;
     }
 
-    public void setDataWystawienia(String dataWystawienia) {
+    @Override
+    public String toString() {
+        return "OfertaSprzedazy{" +
+            "id=" + id +
+            ", cena=" + cena +
+            ", ilosc=" + ilosc +
+            ", pozostalaIlosc=" + pozostalaIlosc +
+            ", dataWystawienia=" + dataWystawienia +
+            ", waluta='" + waluta + '\'' +
+            ", typZlecenia='" + typZlecenia + '\'' +
+            '}';
+    }
+
+    public void setDataWystawienia(Date dataWystawienia) {
         this.dataWystawienia = dataWystawienia;
     }
 

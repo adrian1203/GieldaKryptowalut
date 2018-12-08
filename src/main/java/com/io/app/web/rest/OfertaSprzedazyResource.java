@@ -26,7 +26,7 @@ public class OfertaSprzedazyResource {
 
     @PostMapping("/save")
     @Timed
-    public ResponseEntity<OfertaSprzedazy> createOfertaSprzedazy(@RequestParam OfertaSprzedazy ofertaSprzedazy) {
+    public ResponseEntity<OfertaSprzedazy> createOfertaSprzedazy(@RequestBody OfertaSprzedazy ofertaSprzedazy) {
 
         return ResponseEntity.ok(this.ofertaSprzedazyService.createOfertaSprzedarzy(ofertaSprzedazy));
 
@@ -37,9 +37,16 @@ public class OfertaSprzedazyResource {
     }
     @GetMapping("/oferty-sprzedazys")
     @Timed
-    public ResponseEntity<List<OfertaSprzedazy>> getAllUsers(Pageable pageable) {
-        final Page<OfertaSprzedazy> page = ofertaSprzedazyService.getAllOfertSprzedazy(pageable);
+    public ResponseEntity<List<OfertaSprzedazy>> getAllActual(Pageable pageable) {
+        final Page<OfertaSprzedazy> page = ofertaSprzedazyService.getActualOfertSprzedazy(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/oferty-sprzedazys");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    @GetMapping("/user-oferty-sprzedazys")
+    @Timed
+    public ResponseEntity<List<OfertaSprzedazy>> getAllForUser(Pageable pageable) {
+        final Page<OfertaSprzedazy> page = ofertaSprzedazyService.getForUser(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/user-ferty-sprzedazys");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }

@@ -2,6 +2,7 @@ package com.io.app.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 
 @Entity
@@ -19,9 +20,8 @@ public class OfertaZakupu {
     private Integer ilosc;
     @Column(name = "pozostala_ilosc")
     private Integer pozostalaIlosc;
-    @Size(min=10,max = 10)
-    @Column(name = "dataWystawienia", length = 10)
-    private String dataWystawienia;
+    @Column(name = "datawystawienia", length = 10)
+    private Date dataWystawienia;
     @Size(max = 50)
     @Column(name = "waluta",length = 50)
     private String waluta;
@@ -46,19 +46,6 @@ public class OfertaZakupu {
         return id != null ? id.equals(that.id) : that.id == null;
     }
 
-    @Override
-    public String toString() {
-        return "OfertaZakupu{" +
-            "id=" + id +
-            ", cena=" + cena +
-            ", ilosc=" + ilosc +
-            ", pozostalaIlosc=" + pozostalaIlosc +
-            ", dataWystawienia='" + dataWystawienia + '\'' +
-            ", waluta='" + waluta + '\'' +
-            ", typZlecenia='" + typZlecenia + '\'' +
-            ", user=" + user +
-            '}';
-    }
     public Long getId() {
         return id;
     }
@@ -75,11 +62,24 @@ public class OfertaZakupu {
         this.cena = cena;
     }
 
-    public String getDataWystawienia() {
+    @Override
+    public String toString() {
+        return "OfertaZakupu{" +
+            "id=" + id +
+            ", cena=" + cena +
+            ", ilosc=" + ilosc +
+            ", pozostalaIlosc=" + pozostalaIlosc +
+            ", dataWystawienia=" + dataWystawienia +
+            ", waluta='" + waluta + '\'' +
+            ", typZlecenia='" + typZlecenia + '\'' +
+            '}';
+    }
+
+    public Date getDataWystawienia() {
         return dataWystawienia;
     }
 
-    public void setDataWystawienia(String dataWystawienia) {
+    public void setDataWystawienia(Date dataWystawienia) {
         this.dataWystawienia = dataWystawienia;
     }
 

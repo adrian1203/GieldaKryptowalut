@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { OfertyGieldaService } from './oferty-gielda.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { OfertaSprzedazy } from './oferty-gielda.model';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Principal } from 'app/core';
 import { HttpResponse } from '@angular/common/http';
+import { OfertaSprzedazy } from '../oferty-gielda/oferty-gielda.model';
+import { OfertyGieldaService } from '../oferty-gielda/oferty-gielda.service';
 
 @Component({
-    selector: 'jhi-oferty-gielda',
-    templateUrl: './oferty-gielda.component.html',
+    selector: 'jhi-oferty-sprzedaz',
+    templateUrl: './oferty-sprzedaz.component.html',
     styles: []
 })
-export class OfertyGieldaComponent implements OnInit {
+export class OfertySprzedazComponent implements OnInit {
     currentAccount: any;
     ofertaSprzedazys: OfertaSprzedazy[];
     error: any;
@@ -53,7 +53,7 @@ export class OfertyGieldaComponent implements OnInit {
 
     loadAllOfertaSprzedazy() {
         this.ofertyGieldaService
-            .queryOfertySprzedazy({
+            .queryUserOfertySprzedazy({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()

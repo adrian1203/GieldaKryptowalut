@@ -1,8 +1,22 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { SERVER_API_URL } from '../../app.constants';
+import { OfertaZakupu } from '../oferty-gielda-zakup/oferty-gielda-zakup.model';
+import { Observable } from 'rxjs/Rx';
+import { OfertaSprzedazy } from '../oferty-gielda/oferty-gielda.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class KupnoSprzedazService {
-    constructor() {}
+    private resourceUrl = SERVER_API_URL + 'api/';
+    constructor(private http: HttpClient) {}
+
+    createOfertaZakupu(ofertaZakupu: OfertaZakupu): Observable<HttpResponse<OfertaZakupu>> {
+        return this.http.post<OfertaZakupu>(this.resourceUrl + `zakup/save`, ofertaZakupu, { observe: 'response' });
+    }
+
+    createOfertaSprzedazy(ofertaSprzedazy: OfertaSprzedazy): Observable<HttpResponse<OfertaZakupu>> {
+        return this.http.post<OfertaZakupu>(this.resourceUrl + `sprzedaz/save`, ofertaSprzedazy, { observe: 'response' });
+    }
 }
