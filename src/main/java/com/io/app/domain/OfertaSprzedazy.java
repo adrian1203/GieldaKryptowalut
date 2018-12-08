@@ -17,9 +17,9 @@ public class OfertaSprzedazy {
     @Column(name = "cena")
     private double cena;
     @Column(name = "ilosc")
-    private Integer ilosc;
+    private Long ilosc;
     @Column(name = "pozostala_ilosc")
-    private Integer pozostalaIlosc;
+    private Long pozostalaIlosc;
     @Column(name = "datawystawienia", length = 10)
     private Date dataWystawienia;
     @Size(max = 50)
@@ -46,19 +46,19 @@ public class OfertaSprzedazy {
         return id != null ? id.equals(that.id) : that.id == null;
     }
 
-    public Integer getIlosc() {
+    public Long getIlosc() {
         return ilosc;
     }
 
-    public void setIlosc(Integer ilosc) {
+    public void setIlosc(Long ilosc) {
         this.ilosc = ilosc;
     }
 
-    public Integer getPozostalaIlosc() {
+    public Long getPozostalaIlosc() {
         return pozostalaIlosc;
     }
 
-    public void setPozostalaIlosc(Integer pozostalaIlosc) {
+    public void setPozostalaIlosc(Long pozostalaIlosc) {
         this.pozostalaIlosc = pozostalaIlosc;
     }
 

@@ -40,4 +40,10 @@ public class ZrealizowanaZleceniaResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/zlecenia/user");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    @GetMapping("test-zlecenie")
+    public  void testZlcenia(){
+        this.zrealizowaneZleceniaService.createZrealizowaneZlecenie(1501L,1701L,2L,2.0);
+    }
+
 }

@@ -17,9 +17,9 @@ public class OfertaZakupu {
     @Column(name = "cena")
     private double cena;
     @Column(name = "ilosc")
-    private Integer ilosc;
+    private Long ilosc;
     @Column(name = "pozostala_ilosc")
-    private Integer pozostalaIlosc;
+    private Long pozostalaIlosc;
     @Column(name = "datawystawienia", length = 10)
     private Date dataWystawienia;
     @Size(max = 50)
@@ -29,7 +29,21 @@ public class OfertaZakupu {
     @Column(name = "typ_zlecenia",length = 50)
     private String typZlecenia;
 
+    public void setIlosc(Long ilosc) {
+        this.ilosc = ilosc;
+    }
 
+    public Long getIlosc() {
+        return ilosc;
+    }
+
+    public Long getPozostalaIlosc() {
+        return pozostalaIlosc;
+    }
+
+    public void setPozostalaIlosc(Long pozostalaIlosc) {
+        this.pozostalaIlosc = pozostalaIlosc;
+    }
 
     @ManyToOne
     @JoinColumn(name = "jhi_user_id")
@@ -99,21 +113,7 @@ public class OfertaZakupu {
         this.user = user;
     }
 
-    public Integer getPozostalaIlosc() {
-        return pozostalaIlosc;
-    }
 
-    public void setPozostalaIlosc(Integer pozostalaIlosc) {
-        this.pozostalaIlosc = pozostalaIlosc;
-    }
-
-    public Integer getIlosc() {
-        return ilosc;
-    }
-
-    public void setIlosc(Integer ilosc) {
-        this.ilosc = ilosc;
-    }
 
     public String getTypZlecenia() {
         return typZlecenia;

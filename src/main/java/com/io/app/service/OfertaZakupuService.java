@@ -34,6 +34,10 @@ public class OfertaZakupuService {
         return this.ofertaZakupuRepository.findAll();
     }
 
+    public OfertaZakupu findById(Long id){
+        return this.ofertaZakupuRepository.findById(id).get();
+    }
+
     @Transactional(readOnly = true)
     public Page<OfertaZakupu> getAllOfertSprzedazy(Pageable pageable) {
         return ofertaZakupuRepository.findAll(pageable);
@@ -46,5 +50,8 @@ public class OfertaZakupuService {
     public Page<OfertaZakupu> getAllForUser(Pageable pageable) {
         return ofertaZakupuRepository.findForUser(this.userService.getUserWithAuthorities().get().getId(),
             pageable);
+    }
+    public void update(OfertaZakupu ofertaZakupu){
+        this.ofertaZakupuRepository.save(ofertaZakupu);
     }
 }
