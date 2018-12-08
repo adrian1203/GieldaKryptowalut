@@ -21,14 +21,14 @@ public interface OfertaZakupuRepository extends JpaRepository<OfertaZakupu, Long
         nativeQuery = true)
     Page<OfertaZakupu> findForUser(Long id,Pageable pageable);
 
-    @Query(value = "SELECT * FROM oferta_zakupu WHERE typ_zlecenia='PKC' ORDER BY datawystawienia ",
-        countQuery = "SELECT count(*) FROM oferta_zakupu WHERE typ_zlecenia='PKC' ORDER BY datawystawienia ",
+    @Query(value = "SELECT * FROM oferta_zakupu WHERE typ_zlecenia='PKC'  and pozostala_ilosc >0 ORDER BY datawystawienia ",
+        countQuery = "SELECT count(*) FROM oferta_zakupu WHERE typ_zlecenia='PKC' and pozostala_ilosc >0 ORDER BY datawystawienia ",
         nativeQuery = true)
     List<OfertaZakupu> findOferyZakupuPKC();
 
 
-    @Query(value = "SELECT * FROM oferta_zakupu WHERE typ_zlecenia='NORMAL' ORDER BY cena desc ",
-        countQuery = "SELECT count(*) FROM oferta_zakupu WHERE typ_zlecenia='NORMAL' ORDER BY cena desc ",
+    @Query(value = "SELECT * FROM oferta_zakupu WHERE typ_zlecenia='NORMAL' and pozostala_ilosc >0 ORDER BY cena desc ",
+        countQuery = "SELECT count(*) FROM oferta_zakupu WHERE typ_zlecenia='NORMAL' and pozostala_ilosc >0 ORDER BY cena desc ",
         nativeQuery = true)
     List<OfertaZakupu> findOferyZakupuLIMIT();
 

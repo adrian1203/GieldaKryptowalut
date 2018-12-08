@@ -22,13 +22,13 @@ public interface OfertaSprzedazyRepository extends JpaRepository<OfertaSprzedazy
         nativeQuery = true)
     Page<OfertaSprzedazy> findForUser(Long id,Pageable pageable);
 
-    @Query(value = "SELECT * FROM oferta_sprzedazy WHERE typ_zlecenia='NORMAL' ORDER BY cena ",
-        countQuery = "SELECT count(*) FROM oferta_sprzedazy WHERE typ_zlecenia='NORMAL' ORDER BY cena ",
+    @Query(value = "SELECT * FROM oferta_sprzedazy WHERE typ_zlecenia='NORMAL' and pozostala_ilosc >0 ORDER BY cena ",
+        countQuery = "SELECT count(*) FROM oferta_sprzedazy WHERE typ_zlecenia='NORMAL' and pozostala_ilosc >0 ORDER BY cena ",
         nativeQuery = true)
     List<OfertaSprzedazy> findOferySprzedazyLIMIT();
 
-    @Query(value = "SELECT * FROM oferta_sprzedazy WHERE typ_zlecenia='PKC' ORDER BY datawystawienia ",
-        countQuery = "SELECT count(*) FROM oferta_sprzedazy WHERE typ_zlecenia='PKC' ORDER BY datawystawienia ",
+    @Query(value = "SELECT * FROM oferta_sprzedazy WHERE typ_zlecenia='PKC' and pozostala_ilosc >0 ORDER BY datawystawienia ",
+        countQuery = "SELECT count(*) FROM oferta_sprzedazy WHERE typ_zlecenia='PKC' and pozostala_ilosc >0 ORDER BY datawystawienia ",
         nativeQuery = true)
     List<OfertaSprzedazy> findOferySprzedazyPKC();
 
