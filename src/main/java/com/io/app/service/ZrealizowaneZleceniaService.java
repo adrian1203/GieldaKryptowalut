@@ -32,22 +32,25 @@ public class ZrealizowaneZleceniaService {
         this.ofertaSprzedazyService = ofertaSprzedazyService;
     }
 
-    public ZrealizowaneZlecenia createZrealizowaneZlecenia(ZrealizowaneZlecenia zrealizowaneZlecenia  ){
+    public ZrealizowaneZlecenia createZrealizowaneZlecenia(ZrealizowaneZlecenia zrealizowaneZlecenia) {
         return this.zrealizowaneZleceniaRepository.save(zrealizowaneZlecenia);
     }
-    public List<ZrealizowaneZlecenia> findAllZrealizowaneZlecenia(){
+
+    public List<ZrealizowaneZlecenia> findAllZrealizowaneZlecenia() {
         return this.zrealizowaneZleceniaRepository.findAll();
     }
+
     public Page<ZrealizowaneZlecenia> getAllForUser(Pageable pageable) {
         return zrealizowaneZleceniaRepository.findForUser(this.userService.getUserWithAuthorities().get().getId(),
             pageable);
     }
-    public void createZrealizowaneZlecenie(Long ofertaZakupuId, Long ofertaSprzedazyId, Long ilosc, Double cena){
+
+    public void createZrealizowaneZlecenie(Long ofertaZakupuId, Long ofertaSprzedazyId, Long ilosc, Double cena) {
         ZrealizowaneZlecenia zrealizowaneZlecenia = new ZrealizowaneZlecenia();
-        OfertaSprzedazy ofertaSprzedazy=this.ofertaSprzedazyService.findById(ofertaSprzedazyId);
-        OfertaZakupu ofertaZakupu=this.ofertaZakupuService.findById(ofertaZakupuId);
-        ofertaSprzedazy.setPozostalaIlosc(ofertaSprzedazy.getPozostalaIlosc()-ilosc);
-        ofertaZakupu.setPozostalaIlosc(ofertaZakupu.getPozostalaIlosc()-ilosc);
+        OfertaSprzedazy ofertaSprzedazy = this.ofertaSprzedazyService.findById(ofertaSprzedazyId);
+        OfertaZakupu ofertaZakupu = this.ofertaZakupuService.findById(ofertaZakupuId);
+        ofertaSprzedazy.setPozostalaIlosc(ofertaSprzedazy.getPozostalaIlosc() - ilosc);
+        ofertaZakupu.setPozostalaIlosc(ofertaZakupu.getPozostalaIlosc() - ilosc);
         this.ofertaSprzedazyService.update(ofertaSprzedazy);
         this.ofertaZakupuService.update(ofertaZakupu);
         zrealizowaneZlecenia.setCena(cena);
@@ -58,44 +61,71 @@ public class ZrealizowaneZleceniaService {
         this.zrealizowaneZleceniaRepository.save(zrealizowaneZlecenia);
     }
 
-    public void kupnoPKC(){
-        List<OfertaZakupu> ofertyZakupuPCK=this.ofertaZakupuService.getOfertyZakupuPCK();
+    public void kupnoPKC() {
+        List<OfertaZakupu> ofertyZakupuPCK = this.ofertaZakupuService.getOfertyZakupuPCK();
         ofertyZakupuPCK.forEach((ofertaZakupu -> {
-            List<OfertaSprzedazy> ofertaSprzedazies=this.ofertaSprzedazyService.getOfertySprzedazyLIMIT();
+            List<OfertaSprzedazy> ofertaSprzedazies = this.ofertaSprzedazyService.getOfertySprzedazyLIMIT();
 
             ofertaSprzedazies.forEach(ofertaSprzedazy -> {
-                if(ofertaSprzedazy.getPozostalaIlosc()<=ofertaZakupu.getPozostalaIlosc()){
-                    createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(), ofertaZakupu.getPozostalaIlosc(),ofertaSprzedazy.getCena());
+                if (!check(ofertaSprzedazy, ofertaZakupu, true)) {
                     return;
-                }else{
-                    createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(), ofertaZakupu.getPozostalaIlosc(),ofertaSprzedazy.getCena());
-                    ofertaZakupu.setPozostalaIlosc(ofertaZakupu.getPozostalaIlosc()-ofertaSprzedazy.getPozostalaIlosc());
                 }
+
             });
 
         }));
 
     }
-    public void sprzedazPKC(){
-        List<OfertaSprzedazy> ofertySprzedazyPKC=this.ofertaSprzedazyService.getOfertySprzedazyPKC();
+
+    public void sprzedazPKC() {
+        List<OfertaSprzedazy> ofertySprzedazyPKC = this.ofertaSprzedazyService.getOfertySprzedazyPKC();
 
         ofertySprzedazyPKC.forEach(ofertaSprzedazy -> {
             List<OfertaZakupu> ofertaZakupus = this.ofertaZakupuService.getOfertyZakupuLIMIT();
             ofertaZakupus.forEach(ofertaZakupu -> {
-                if(ofertaZakupu.getPozostalaIlosc()>=ofertaSprzedazy.getPozostalaIlosc()){
-                    createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(),ofertaSprzedazy.getPozostalaIlosc(),ofertaZakupu.getCena());
+                if (!check(ofertaSprzedazy, ofertaZakupu, true)) {
                     return;
-                }else{
-                    createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(),ofertaSprzedazy.getPozostalaIlosc(),ofertaZakupu.getCena());
-                    ofertaSprzedazy.setPozostalaIlosc(ofertaSprzedazy.getPozostalaIlosc()-ofertaZakupu.getPozostalaIlosc());
                 }
-            });
-        });
 
+            });
+
+        });
     }
 
-    public void wykonajTransakcje(){
+    public void transakcjeLIMIT() {
+        List<OfertaSprzedazy> ofertaSprzedazies = this.ofertaSprzedazyService.getOfertySprzedazyLIMIT();
+
+        ofertaSprzedazies.forEach(ofertaSprzedazy -> {
+            List<OfertaZakupu> ofertaZakupus = this.ofertaZakupuService.getOfertyZakupuLIMIT();
+            ofertaZakupus.forEach(ofertaZakupu -> {
+                if (!check(ofertaSprzedazy, ofertaZakupu, false)) {
+                    return;
+                }
+            });
+
+        });
+    }
+
+    public boolean check(OfertaSprzedazy ofertaSprzedazy, OfertaZakupu ofertaZakupu, boolean isPKC) {
+        if (ofertaSprzedazy.getUser() == ofertaZakupu.getUser()) {
+            return false;
+        }
+        if (ofertaSprzedazy.getCena() < ofertaZakupu.getCena() || isPKC) {
+            if (ofertaSprzedazy.getPozostalaIlosc() >= ofertaZakupu.getPozostalaIlosc()) {
+                createZrealizowaneZlecenie(ofertaZakupu.getId(), ofertaSprzedazy.getId(), ofertaZakupu.getPozostalaIlosc(), ofertaSprzedazy.getCena());
+                return false;
+            } else {
+                createZrealizowaneZlecenie(ofertaZakupu.getId(), ofertaSprzedazy.getId(), ofertaSprzedazy.getPozostalaIlosc(), ofertaSprzedazy.getCena());
+                ofertaZakupu.setPozostalaIlosc(0L);
+                return true;
+            }
+        }
+        return true;
+    }
+
+    public void wykonajTransakcje() {
         this.sprzedazPKC();
         this.kupnoPKC();
+        this.transakcjeLIMIT();
     }
 }
