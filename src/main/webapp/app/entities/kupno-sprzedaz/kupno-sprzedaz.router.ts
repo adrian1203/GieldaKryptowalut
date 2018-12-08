@@ -10,7 +10,14 @@ import { JhiResolvePagingParams } from 'ng-jhipster';
 
 export const KupnoSprzedazRouter: Route = {
     path: 'kupno-sprzedaz',
-    component: KupnoSprzedazComponent
+    component: KupnoSprzedazComponent,
+    resolve: {
+        pagingParams: JhiResolvePagingParams
+    },
+    data: {
+        pageTitle: 'userManagement.home.title',
+        defaultSort: 'id,asc'
+    }
 };
 export const KupnoSprzedazNewZakupRouter: Route = {
     path: 'kupno-sprzedaz-new-zakup',

@@ -27,7 +27,7 @@
             <td>{{oferta.typZlecenia}}</td>
             <td>{{oferta.pozostalaIlosc}}</td>
             <td>{{oferta.ilosc}}</td>
-           
+
         </tr>
         </tbody>
     </table>
@@ -40,43 +40,5 @@
                 <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
             </div>
         </div>
-    
-</div>
-<div>
-    <div class="table-responsive" *ngIf="ofertaKupnas">
-        Oferty Kupna
-    <table class="table table-striped">
-        <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
 
-            <!-- <th jhiSortBy="lastModifiedDate"><span jhiTranslate="userManagement.lastModifiedDate">Last Modified Date</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-            <th jhiSortBy="dataWystawienia">Data Wystawienia  <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="cena">Cena  <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="typZlecenia">Typ Zlecenia <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="pozostalaIlosc">Pozostała ilość <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="ilosc">Ilosc poczatkowa <fa-icon [icon]="'sort'"></fa-icon></th>
-        </tr>
-        </thead>
-        <tbody *ngIf ="ofertaKupnas  " >
-            <!-- *ngFor="let user of users; trackBy: trackIdentity" -->
-        <tr *ngFor="let oferta of ofertaKupnas; trackBy: trackIdentity">
-            <td>{{oferta.dataWystawienia  | date:'dd/MM/yy HH:mm'}}</td>
-            <td>{{oferta.cena}}</td>
-            <td>{{oferta.typZlecenia}}</td>
-            <td>{{oferta.pozostalaIlosc}}</td>
-            <td>{{oferta.ilosc}}</td>
-           
-        </tr>
-        </tbody>
-    </table>
-    </div>
-    <div *ngIf="ofertaKupnas">
-            <div class="row justify-content-center">
-                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-            </div>
-            <div class="row justify-content-center">
-                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-            </div>
-        </div>
-    
 </div>

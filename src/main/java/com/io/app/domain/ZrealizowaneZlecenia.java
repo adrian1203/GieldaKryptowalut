@@ -2,6 +2,7 @@ package com.io.app.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 
 @Entity
@@ -14,16 +15,56 @@ public class ZrealizowaneZlecenia {
     private Long id;
 
 
-    @Column(name = "oferta_sprzedazy_id")
-    private Long oferta_sprzedazy_id;
-    @Size(max = 100)
-    @Column(name = "data_realizacji",length = 100)
-    private String data_realizacji;
+    @Column(name = "data_realizacji")
+    private Date dataRealizacji;
+
     @Column(name = "cena")
     private double cena;
-    @Column(name = "oferta_zakupu_id")
-    private Long oferta_zakupu_id;
 
+    @Column(name = "ilosc")
+    private Long ilosc;
+
+
+    @ManyToOne
+    @JoinColumn(name = "oferta_zakupu_id")
+    private OfertaZakupu ofertaZakupu;
+
+    @ManyToOne
+    @JoinColumn(name = "oferta_sprzedazy_id")
+    private OfertaSprzedazy ofertaSprzedazy ;
+
+
+    public Date getDataRealizacji() {
+        return dataRealizacji;
+    }
+
+    public void setDataRealizacji(Date dataRealizacji) {
+        this.dataRealizacji = dataRealizacji;
+    }
+
+    public Long getIlosc() {
+        return ilosc;
+    }
+
+    public void setIlosc(Long ilosc) {
+        this.ilosc = ilosc;
+    }
+
+    public OfertaZakupu getOfertaZakupu() {
+        return ofertaZakupu;
+    }
+
+    public void setOfertaZakupu(OfertaZakupu ofertaZakupu) {
+        this.ofertaZakupu = ofertaZakupu;
+    }
+
+    public OfertaSprzedazy getOfertaSprzedazy() {
+        return ofertaSprzedazy;
+    }
+
+    public void setOfertaSprzedazy(OfertaSprzedazy ofertaSprzedazy) {
+        this.ofertaSprzedazy = ofertaSprzedazy;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -35,15 +76,15 @@ public class ZrealizowaneZlecenia {
         return id != null ? id.equals(that.id) : that.id == null;
     }
 
-
     @Override
     public String toString() {
-        return "Przelewy={" +
+        return "ZrealizowaneZlecenia{" +
             "id=" + id +
-            ", oferta_sprzedazy_id='" + oferta_sprzedazy_id + '\'' +
-            ", data_realizacji='" + data_realizacji + '\'' +
-            ", cena='" + cena + '\'' +
-            ", oferta_zakupu_id='" + oferta_zakupu_id + '\''+
+            ", dataRealizacji=" + dataRealizacji +
+            ", cena=" + cena +
+            ", ilosc=" + ilosc +
+            ", ofertaZakupu=" + ofertaZakupu +
+            ", ofertaSprzedazy=" + ofertaSprzedazy +
             '}';
     }
 
@@ -56,21 +97,6 @@ public class ZrealizowaneZlecenia {
         this.id = id;
     }
 
-    public Long getOferta_sprzedazy_id() {
-        return oferta_sprzedazy_id;
-    }
-
-    public void setOferta_sprzedazy_id(Long oferta_sprzedazy_id) {
-        this.oferta_sprzedazy_id = oferta_sprzedazy_id;
-    }
-
-    public String getData_realizacji() {
-        return data_realizacji;
-    }
-
-    public void setData_realizacji(String data_realizacji) {
-        this.data_realizacji = data_realizacji;
-    }
 
     public double getCena() {
         return cena;
@@ -80,11 +106,5 @@ public class ZrealizowaneZlecenia {
         this.cena = cena;
     }
 
-    public Long getOferta_zakupu_id() {
-        return oferta_zakupu_id;
-    }
 
-    public void setOferta_zakupu_id(Long oferta_zakupu_id) {
-        this.oferta_zakupu_id = oferta_zakupu_id;
-    }
 }

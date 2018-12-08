@@ -1,8 +1,5 @@
 <p>
-  kupno-sprzedaz works!
-
-
-    kupno-sprzedaz-new-zakup
+  
 
     <button class="btn btn-primary float-right jh-create-entity" [routerLink]="['../kupno-sprzedaz-new-zakup']" >
         <span>Dodaj ofertę zakupu</span>
@@ -18,3 +15,41 @@
         <span>Moje oferty kupna</span>
     </button>
 </p>
+<p>Moje zrealizowane zlecenia</p>
+<div>
+    <div class="table-responsive" *ngIf="zrealizowaneZlecenias">
+    <table class="table table-striped">
+        <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+
+            <!-- <th jhiSortBy="lastModifiedDate"><span jhiTranslate="userManagement.lastModifiedDate">Last Modified Date</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <th jhiSortBy="dataWystawienia">Data Realizacji  <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cena">Cena  <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pozostalaIlosc"> Ilość <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th>Sprzedaż/Zakup</th>
+        </tr>
+        </thead>
+        <tbody *ngIf ="zrealizowaneZlecenias  " >
+            <!-- *ngFor="let user of users; trackBy: trackIdentity" -->
+        <tr *ngFor="let zlecenie of zrealizowaneZlecenias; trackBy: trackIdentity">
+            <td>{{zlecenie.dataRealizacji | date:'dd/MM/yy HH:mm'}}</td>
+            <td>{{zlecenie.cena}}</td>
+            <td>{{zlecenie.ilosc}}</td>
+            <th></th>
+
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <div *ngIf="zrealizowaneZlecenias">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+
+</div>
+
+
