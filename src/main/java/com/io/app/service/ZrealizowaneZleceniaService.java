@@ -50,14 +50,47 @@ public class ZrealizowaneZleceniaService {
         ofertaZakupu.setPozostalaIlosc(ofertaZakupu.getPozostalaIlosc()-ilosc);
         this.ofertaSprzedazyService.update(ofertaSprzedazy);
         this.ofertaZakupuService.update(ofertaZakupu);
-
         zrealizowaneZlecenia.setCena(cena);
         zrealizowaneZlecenia.setIlosc(ilosc);
         zrealizowaneZlecenia.setOfertaSprzedazy(ofertaSprzedazy);
         zrealizowaneZlecenia.setOfertaZakupu(ofertaZakupu);
         zrealizowaneZlecenia.setDataRealizacji(new Date());
-
         this.zrealizowaneZleceniaRepository.save(zrealizowaneZlecenia);
+    }
+
+    public void KupnoPKC(){
+        List<OfertaZakupu> ofertyZakupuPCK=this.ofertaZakupuService.getOfertyZakupuPCK();
+        ofertyZakupuPCK.forEach((ofertaZakupu -> {
+            List<OfertaSprzedazy> ofertaSprzedazies=this.ofertaSprzedazyService.getOfertySprzedazyLIMIT();
+
+            ofertaSprzedazies.forEach(ofertaSprzedazy -> {
+                if(ofertaSprzedazy.getPozostalaIlosc()<=ofertaZakupu.getPozostalaIlosc()){
+                    createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(), ofertaZakupu.getPozostalaIlosc(),ofertaSprzedazy.getCena());
+                    return;
+                }else{
+                    createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(), ofertaZakupu.getPozostalaIlosc(),ofertaSprzedazy.getCena());
+                    ofertaZakupu.setPozostalaIlosc(ofertaZakupu.getPozostalaIlosc()-ofertaSprzedazy.getPozostalaIlosc());
+                }
+            });
+
+        }));
+
+    }
+    public void SprzedazPKC(){
+        List<OfertaSprzedazy> ofertySprzedazyPKC=this.ofertaSprzedazyService.getOfertySprzedazyPKC();
+
+        ofertySprzedazyPKC.forEach(ofertaSprzedazy -> {
+            List<OfertaZakupu> ofertaZakupus = this.ofertaZakupuService.getOfertyZakupuLIMIT();
+            ofertaZakupus.forEach(ofertaZakupu -> {
+                if(ofertaZakupu.getPozostalaIlosc()>=ofertaSprzedazy.getPozostalaIlosc()){
+                    createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(),ofertaSprzedazy.getPozostalaIlosc(),ofertaZakupu.getCena());
+                    return;
+                }else{
+                    createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(),ofertaSprzedazy.getPozostalaIlosc(),ofertaZakupu.getCena());
+                    ofertaSprzedazy.setPozostalaIlosc(ofertaSprzedazy.getPozostalaIlosc()-ofertaZakupu.getPozostalaIlosc());
+                }
+            });
+        });
 
 
     }

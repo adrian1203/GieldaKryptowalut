@@ -54,4 +54,11 @@ public class OfertaZakupuService {
     public void update(OfertaZakupu ofertaZakupu){
         this.ofertaZakupuRepository.save(ofertaZakupu);
     }
+
+    List<OfertaZakupu> getOfertyZakupuPCK(){
+        return this.ofertaZakupuRepository.findOferyZakupuPKC();
+    }
+    public List<OfertaZakupu> getOfertyZakupuLIMIT(){
+        return this.ofertaZakupuRepository.findOferyZakupuLIMIT();
+    }
 }

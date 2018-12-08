@@ -44,6 +44,9 @@ export class KupnoSprzedazNewOfertaSprzedazComponent implements OnInit {
     save() {
         console.log(this.settingsAccount);
         this.isSaving = true;
+        if ((this.ofertaSprzedazy.typZlecenia = 'PKC')) {
+            this.ofertaSprzedazy.cena = null;
+        }
         // this.ofertaZakupu.user=this.user;
         this.kupnoSprzedazService
             .createOfertaSprzedazy(this.ofertaSprzedazy)

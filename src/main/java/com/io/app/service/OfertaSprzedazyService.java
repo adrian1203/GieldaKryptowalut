@@ -59,4 +59,12 @@ public class OfertaSprzedazyService {
     }
 
 
+    public List<OfertaSprzedazy> getOfertySprzedazyLIMIT(){
+        return this.ofertaSprzedazyRepository.findOferySprzedazyLIMIT();
+    }
+    List<OfertaSprzedazy> getOfertySprzedazyPKC(){
+        return this.ofertaSprzedazyRepository.findOferySprzedazyPKC();
+    }
+
+
 }
