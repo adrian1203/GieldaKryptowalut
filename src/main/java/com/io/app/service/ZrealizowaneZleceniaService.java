@@ -93,9 +93,30 @@ public class ZrealizowaneZleceniaService {
         });
 
     }
+    public void transakcjeLIMIT(){
+        List<OfertaSprzedazy> ofertaSprzedazies = this.ofertaSprzedazyService.getOfertySprzedazyLIMIT();
+
+        ofertaSprzedazies.forEach(ofertaSprzedazy -> {
+            List<OfertaZakupu> ofertaZakupus=this.ofertaZakupuService.getOfertyZakupuLIMIT();
+            ofertaZakupus.forEach(ofertaZakupu ->{
+                if(ofertaSprzedazy.getCena()<ofertaZakupu.getCena()){
+                    if(ofertaSprzedazy.getPozostalaIlosc()<=ofertaZakupu.getPozostalaIlosc()){
+                        createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(), ofertaZakupu.getPozostalaIlosc(),ofertaSprzedazy.getCena());
+                        return;
+                    }else{
+                        createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(), ofertaZakupu.getPozostalaIlosc(),ofertaSprzedazy.getCena());
+                        ofertaZakupu.setPozostalaIlosc(ofertaZakupu.getPozostalaIlosc()-ofertaSprzedazy.getPozostalaIlosc());
+                    }
+                }
+
+            });
+
+        });
+    }
 
     public void wykonajTransakcje(){
         this.sprzedazPKC();
         this.kupnoPKC();
+        this.transakcjeLIMIT();
     }
 }
