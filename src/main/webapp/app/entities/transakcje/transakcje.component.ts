@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TransakcjeService } from './transakcje.service';
+import { KontoBankowe } from './transakcje.model';
 
 @Component({
     selector: 'jhi-transakcje',
@@ -6,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
     styles: []
 })
 export class TransakcjeComponent implements OnInit {
-    constructor() {}
+    konto: KontoBankowe;
+    constructor(private transakcjeService: TransakcjeService) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.transakcjeService.findKonto().subscribe(res => {
+            console.log(res);
+            this.konto = res;
+        });
+    }
 }

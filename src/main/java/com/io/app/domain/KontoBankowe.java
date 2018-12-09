@@ -14,11 +14,11 @@ public class KontoBankowe {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Size(min = 26, max = 26)
+    @Size( max = 26)
     @Column(name="numer",length = 26)
     private String numer;
     @Column(name = "stan_konta")
-    private double stan_konta;
+    private double stanKonta;
     @Size(max = 50)
     @Column(name = "waluta",length =50 )
     private String waluta;
@@ -27,10 +27,16 @@ public class KontoBankowe {
     @JoinColumn(name = "jhi_user_id")
     private User user;
 
-
-    //Constructor
-    public KontoBankowe() {
+    @Override
+    public String toString() {
+        return "KontoBankowe{" +
+            "id=" + id +
+            ", numer='" + numer + '\'' +
+            ", stanKonta=" + stanKonta +
+            ", waluta='" + waluta + '\'' +
+            '}';
     }
+
 
 
     @Override
@@ -44,17 +50,7 @@ public class KontoBankowe {
     }
 
 
-    @Override
-    public String toString() {
-        return "KontoBankowe{" +
-            "id=" + id +
-            ", numer='" + numer + '\'' +
-            ", stan_konta=" + stan_konta +
-            ", waluta='" + waluta + '\'' +
-            ", user=" + user +
-            '}';
-    }
-//Getters&Setters
+    //Getters&Setters
 
     public Long getId() {
         return id;
@@ -72,12 +68,12 @@ public class KontoBankowe {
         this.numer = numer;
     }
 
-    public double getStan_konta() {
-        return stan_konta;
+    public double getStanKonta() {
+        return stanKonta;
     }
 
-    public void setStan_konta(double stan_konta) {
-        this.stan_konta = stan_konta;
+    public void setStanKonta(double stanKonta) {
+        this.stanKonta = stanKonta;
     }
 
     public String getWaluta() {

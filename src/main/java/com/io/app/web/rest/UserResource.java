@@ -4,6 +4,7 @@ import com.io.app.config.Constants;
 import com.io.app.domain.User;
 import com.io.app.repository.UserRepository;
 import com.io.app.security.AuthoritiesConstants;
+import com.io.app.service.KontoBankoweService;
 import com.io.app.service.MailService;
 import com.io.app.service.UserService;
 import com.io.app.service.dto.UserDTO;
@@ -66,11 +67,14 @@ public class UserResource {
 
     private final MailService mailService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    private final KontoBankoweService kontoBankoweService;
+
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService,KontoBankoweService kontoBankoweService) {
 
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.kontoBankoweService = kontoBankoweService;
     }
 
     /**
@@ -101,6 +105,10 @@ public class UserResource {
         } else {
             User newUser = userService.createUser(userDTO);
             mailService.sendCreationEmail(newUser);
+            this.kontoBankoweService.createNewKonto(newUser);
+
+            ///stwórz konto
+            ///stwórz portfel
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
                 .body(newUser);

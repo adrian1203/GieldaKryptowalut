@@ -5,6 +5,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.io.app.domain.User;
 import com.io.app.repository.UserRepository;
 import com.io.app.security.SecurityUtils;
+import com.io.app.service.KontoBankoweService;
 import com.io.app.service.MailService;
 import com.io.app.service.UserService;
 import com.io.app.service.dto.PasswordChangeDTO;
@@ -39,11 +40,14 @@ public class AccountResource {
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    private final KontoBankoweService kontoBankoweService;
+
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, KontoBankoweService kontoBankoweService) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.kontoBankoweService = kontoBankoweService;
     }
 
     /**
@@ -63,6 +67,10 @@ public class AccountResource {
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
         mailService.sendActivationEmail(user);
+        //createkonto
+        //createPorfel
+        this.kontoBankoweService.createNewKonto(user);
+
     }
 
     /**
