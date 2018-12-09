@@ -22,7 +22,7 @@ public class KontoBankoweService {
         KontoBankowe kontoBankowe = new KontoBankowe();
         kontoBankowe.setUser(user);
         kontoBankowe.setWaluta("PLN");
-        kontoBankowe.setStanKonta(0.0);
+        kontoBankowe.setStanKonta(5000);
         kontoBankowe.setNumer("33333333333333");
 
         this.kontoBankoweRepository.save(kontoBankowe);
@@ -30,5 +30,14 @@ public class KontoBankoweService {
     }
     public KontoBankowe getKonto(){
         return this.kontoBankoweRepository.findKontoBankowe(this.userService.getUserWithAuthorities().get().getId()).get(0);
+    }
+
+    public KontoBankowe getKontoByUserId(Long id){
+        return this.kontoBankoweRepository.findKontoBankowe(id).get(0);
+    }
+    public KontoBankowe updateStanKonta(KontoBankowe kontoBankowe, Double wartosc){
+        kontoBankowe.setStanKonta(kontoBankowe.getStanKonta()+wartosc);
+
+        return this.kontoBankoweRepository.save(kontoBankowe);
     }
 }

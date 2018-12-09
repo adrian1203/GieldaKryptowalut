@@ -4,6 +4,7 @@ import com.io.app.config.Constants;
 import com.io.app.domain.User;
 import com.io.app.repository.UserRepository;
 import com.io.app.security.AuthoritiesConstants;
+import com.io.app.service.CryptocService;
 import com.io.app.service.KontoBankoweService;
 import com.io.app.service.MailService;
 import com.io.app.service.UserService;
@@ -16,6 +17,7 @@ import com.io.app.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 
+import org.bitcoinj.params.RegTestParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -69,12 +71,16 @@ public class UserResource {
 
     private final KontoBankoweService kontoBankoweService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService,KontoBankoweService kontoBankoweService) {
+    private final CryptocService cryptocService;
+
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, KontoBankoweService kontoBankoweService, CryptocService cryptocService) {
 
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
         this.kontoBankoweService = kontoBankoweService;
+
+        this.cryptocService = cryptocService;
     }
 
     /**
@@ -106,6 +112,7 @@ public class UserResource {
             User newUser = userService.createUser(userDTO);
             mailService.sendCreationEmail(newUser);
             this.kontoBankoweService.createNewKonto(newUser);
+            this.cryptocService.LoadWallet(newUser.getLogin(), RegTestParams.get());
 
             ///stwórz konto
             ///stwórz portfel

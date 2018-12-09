@@ -14,4 +14,6 @@ public interface KontoBankoweRepository extends JpaRepository<KontoBankowe, Long
         countQuery = "SELECT count(*) FROM FROM konto_bankowe WHERE jhi_user_id= ?1  ",
         nativeQuery = true)
     List<KontoBankowe> findKontoBankowe(Long id);
+
+
 }

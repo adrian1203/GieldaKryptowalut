@@ -5,6 +5,7 @@ import com.io.app.domain.Authority;
 import com.io.app.domain.User;
 import com.io.app.repository.UserRepository;
 import com.io.app.security.AuthoritiesConstants;
+import com.io.app.service.CryptocService;
 import com.io.app.service.KontoBankoweService;
 import com.io.app.service.MailService;
 import com.io.app.service.UserService;
@@ -97,6 +98,9 @@ public class UserResourceIntTest {
     private EntityManager em;
 
     @Autowired
+    private CryptocService cryptocService;
+
+    @Autowired
     private CacheManager cacheManager;
 
     private MockMvc restUserMockMvc;
@@ -107,7 +111,7 @@ public class UserResourceIntTest {
     public void setup() {
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).clear();
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).clear();
-        UserResource userResource = new UserResource(userService, userRepository, mailService, kontoBankoweService);
+        UserResource userResource = new UserResource(userService, userRepository, mailService, kontoBankoweService, cryptocService);
 
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(userResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
