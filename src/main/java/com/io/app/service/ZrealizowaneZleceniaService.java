@@ -137,19 +137,7 @@ public class ZrealizowaneZleceniaService {
         });
     }
 
-    public void transakcjeLIMIT() {
-        List<OfertaSprzedazy> ofertaSprzedazies = this.ofertaSprzedazyService.getOfertySprzedazyLIMIT();
-
-        ofertaSprzedazies.forEach(ofertaSprzedazy -> {
-            List<OfertaZakupu> ofertaZakupus = this.ofertaZakupuService.getOfertyZakupuLIMIT();
-            ofertaZakupus.forEach(ofertaZakupu -> {
-                if (!check(ofertaSprzedazy, ofertaZakupu, false)) {
-                    return;
-                }
-            });
-
-        });
-    }
+  
 
     public boolean check(OfertaSprzedazy ofertaSprzedazy, OfertaZakupu ofertaZakupu, boolean isPKC) {
         if (ofertaSprzedazy.getUser() == ofertaZakupu.getUser()) {
