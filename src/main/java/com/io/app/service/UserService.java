@@ -131,7 +131,7 @@ public class UserService {
         this.clearUserCaches(existingUser);
         return true;
     }
-
+    ///tworzenie uzytkownika
     public User createUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());

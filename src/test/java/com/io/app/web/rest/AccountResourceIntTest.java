@@ -7,6 +7,8 @@ import com.io.app.domain.User;
 import com.io.app.repository.AuthorityRepository;
 import com.io.app.repository.UserRepository;
 import com.io.app.security.AuthoritiesConstants;
+import com.io.app.service.CryptocService;
+import com.io.app.service.KontoBankoweService;
 import com.io.app.service.MailService;
 import com.io.app.service.UserService;
 import com.io.app.service.dto.PasswordChangeDTO;
@@ -69,6 +71,12 @@ public class AccountResourceIntTest {
     @Autowired
     private ExceptionTranslator exceptionTranslator;
 
+    @Autowired
+    private KontoBankoweService kontoBankoweService;
+
+    @Autowired
+    private CryptocService cryptocService;
+
     @Mock
     private UserService mockUserService;
 
@@ -84,10 +92,10 @@ public class AccountResourceIntTest {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail(any());
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userService, mockMailService, kontoBankoweService, cryptocService);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, mockUserService, mockMailService, kontoBankoweService, cryptocService);
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)
             .setControllerAdvice(exceptionTranslator)
