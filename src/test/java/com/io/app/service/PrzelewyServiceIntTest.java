@@ -70,7 +70,7 @@ public class PrzelewyServiceIntTest {
 
     @Test
     @Transactional
-    public void czyWysyłanyJestPrzelew() {
+    public void czyWysylanyJestPrzelew() {
         KontoBankowe konto=kontoBankoweService.getKontoByUserId(user.getId());
         KontoBankowe konto1=kontoBankoweService.getKontoByUserId(user1.getId());
         przelewyService.createPrzelew(konto,konto1,1000.0);
