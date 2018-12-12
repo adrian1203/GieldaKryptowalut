@@ -15,6 +15,13 @@
     {{kontoBTCbalance}}
 </div>
 
+<div *ngIf="kontoBTCaddress!=undefinded">
+    Stan mojego portfela BTC:
+    {{kontoBTCaddress}}
+</div>
+
+<button (click)="refresh()"> Refersh</button>
+
 
 <h3>Przelewy na moim koncie</h3>
 <div>

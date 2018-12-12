@@ -35,4 +35,18 @@ public class KontoBankoweResurce {
     public Long getWalletBalance(){
         return this.cryptocService.GetWalletBalance(this.userService.getUserWithAuthorities().get().getLogin(), RegTestParams.get());
     }
+    @GetMapping("/kontoBTC-address")
+    @Timed
+    String  getWalletAddress(){
+        return this.cryptocService.GetWalletAdress(this.userService.getUserWithAuthorities().get().getLogin(), RegTestParams.get());
+    }
+
+    @GetMapping("/kontoBTC-refresh")
+    @Timed
+    void  Refresh(){
+       // return this.cryptocService.GetWalletAdress(this.userService.getUserWithAuthorities().get().getLogin(), RegTestParams.get());
+        this.cryptocService.RefreshWallet(RegTestParams.get(),this.userService.getUserWithAuthorities().get().getLogin() );
+    }
+
+
 }

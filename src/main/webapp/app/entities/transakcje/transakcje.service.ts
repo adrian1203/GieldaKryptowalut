@@ -23,4 +23,11 @@ export class TransakcjeService {
         const options = createRequestOption(req);
         return this.http.get<Przelewy[]>(this.resourceUrl + `przelewy-user`, { params: options, observe: 'response' });
     }
+    getAddress(): Observable<HttpResponse<string>> {
+        return this.http.get<string>(this.resourceUrl + `kontoBTC-address`, { observe: 'response' });
+    }
+    refresh() {
+        console.log('chuja2');
+        return this.http.get<any>(this.resourceUrl + `kontoBTC-refresh`);
+    }
 }
