@@ -37,14 +37,15 @@ public class CryptocService {
     * Info about creating and sending btc in regtest (and in other but especially in regtest):
     * We can send first BTC to our wallet from cmd or powerShell, steps to do:
     * 1) bitcoind -regtest  => start regtest instance of bitcoin in backgroun, new terminal needs to be open!!!
-    * 2) bitcoin-cli -regtest generate 101   => generate 101 blocks, your wallet gets immadetialy 50BTC reward
-    * 3) bitcoin-cli -regtest getbalance   => check balance of account
+    * 2) bitcoin-cli -regtest generate 101   => generate 101 blocks, your !!!SERVER!!! wallet gets immadetialy 50BTC reward
+    * 3) bitcoin-cli -regtest getbalance   => check balance of SERVER wallet
     * 4) bitcoin-cli -regtest sendtoadress "ADRESS_FROM_HERE" X    => where X is amount of mBTC and "ADD.." is adress from GetWalletAdress()
-    * The most important - each of us should work only on his own geenrated wallet, because each of us has own and different
+    * The most important - each of us should work only on his own generated wallet, because each of us has own and different
     * blockchain generated! So in main() change "kuba" to for example "adrian" or "jan" or "kamil"!
     *
     * NOTE: After SendToAddress(..) you have to confirm transaction in shell by typing:
     * bitcoin-cli -regtest generate 1
+    * This will confirm your transaction, and then you have to call RefreshWallet() method on wallet to update it with new transaction!
     */
 
 
