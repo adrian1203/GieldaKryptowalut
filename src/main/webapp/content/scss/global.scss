@@ -24,6 +24,15 @@ a:hover {
     cursor: pointer;
 }
 
+.container-fluid {
+    padding-top: 3px;
+    background-color: #353d47;
+}
+
+.card.jh-card {
+    background-color: white;
+}
+
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */
