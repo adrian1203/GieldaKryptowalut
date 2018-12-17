@@ -28,6 +28,7 @@ export class TransakcjeComponent implements OnInit {
     predicate: any;
     previousPage: any;
     reverse: any;
+    kontoBTCaddress: string;
     constructor(
         private transakcjeService: TransakcjeService,
         private router: Router,
@@ -51,14 +52,24 @@ export class TransakcjeComponent implements OnInit {
             this.konto = res;
         });
         this.transakcjeService.getBTCBalance().subscribe(res => {
+            console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
             console.log(res);
             this.kontoBTCbalance = res;
+        });
+        this.transakcjeService.getAddress().subscribe(res => {
+            console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
+            console.log(res.body);
+            this.kontoBTCaddress = res.body;
         });
         this.page = 1;
         this.loadAllPrzelewy();
     }
     trackIdentity(index, item: Przelewy) {
         return item.id;
+    }
+    refresh() {
+        console.log('chuj');
+        this.transakcjeService.refresh();
     }
 
     loadAllPrzelewy() {

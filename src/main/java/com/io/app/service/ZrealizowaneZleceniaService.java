@@ -54,11 +54,11 @@ public class ZrealizowaneZleceniaService {
     public void realizeTransfer(OfertaZakupu ofertaZakupu, OfertaSprzedazy ofertaSprzedazy,  Long ilosc, Double cena){
 
         if(cena==0){cena=ofertaZakupu.getCena();}
-        if(checkStanKonta(ofertaZakupu.getUser(),ilosc, cena) || checkWalletBTC(ofertaSprzedazy.getUser(), ilosc)){
+        if(checkStanKonta(ofertaZakupu.getUser(),ilosc, cena) && checkWalletBTC(ofertaSprzedazy.getUser(), ilosc)){
 
             //TODO odkomentować createBTCTeanser i zmienić || na && ^^ gdy będziemy mieć bitcoiny na koncie xD
             this.createZrealizowaneZlecenie(ofertaZakupu.getId(),ofertaSprzedazy.getId(),ilosc, cena);
-           // this.createBTCTransfer(ofertaSprzedazy.getUser().getLogin(),ofertaZakupu.getUser().getLogin(), ilosc);
+            this.createBTCTransfer(ofertaSprzedazy.getUser().getLogin(),ofertaZakupu.getUser().getLogin(), ilosc);
             this.createKontoBankoweTransfer(ofertaZakupu.getUser(), ofertaSprzedazy.getUser(),ilosc,cena);
 
         }
@@ -100,9 +100,10 @@ public class ZrealizowaneZleceniaService {
     }
 
     public void createBTCTransfer(String senderLogin, String recipientLogin, Long ilosc ){
-        Wallet senderWallet= this.cryptocService.LoadWallet(senderLogin, RegTestParams.get());
+        Wallet senderWallet= this.cryptocService.LoadWallet(new String(senderLogin), RegTestParams.get());
         String respientAdress = this.cryptocService.GetWalletAdress(recipientLogin,RegTestParams.get());
-        this.cryptocService.SendToAdress(senderWallet,senderLogin,RegTestParams.get(),ilosc,respientAdress);
+
+        this.cryptocService.SendToAdress(senderWallet,senderLogin,RegTestParams.get(),ilosc,new String(respientAdress));
 
     }
 
@@ -137,7 +138,7 @@ public class ZrealizowaneZleceniaService {
         });
     }
 
-  
+
 
     public boolean check(OfertaSprzedazy ofertaSprzedazy, OfertaZakupu ofertaZakupu, boolean isPKC) {
         if (ofertaSprzedazy.getUser() == ofertaZakupu.getUser()) {

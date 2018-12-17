@@ -70,13 +70,14 @@ public class GieldaKryptowalutApp {
         logApplicationStartup(env);
 
         //Testing cryptoc
-        CryptocService ss = new CryptocService();
-        //ss.Wallet();
-        Wallet wallet = ss.LoadWallet("kuba",RegTestParams.get());
-        //ss.RefreshWallet(wallet,RegTestParams.get(),"kuba");
-        //ss.GetWalletAdress("kuba",RegTestParams.get());
-        ss.GetWalletBalance("kuba",RegTestParams.get());
-        //ss.SendToAdress(wallet,"kuba",RegTestParams.get(),100000000,"mpXYYDTMruK5ZJNZ85mKjtjCyRm3CnMQBj");
+       CryptocService ss = new CryptocService();
+
+//        Wallet wallet = ss.LoadWallet("main3",RegTestParams.get());
+        ss.RefreshWallet(RegTestParams.get(),"adi1");
+        ss.RefreshWallet(RegTestParams.get(),"adi2");
+//        //ss.GetWalletAdress("kuba",RegTestParams.get());
+       ss.GetWalletBalance("main3",RegTestParams.get());
+        //ss.SendToAdress(wallet,"main2",RegTestParams.get(),100000000,"mpGV7f5iJRxh5Mg75yvhVZ6b9VDQg1wLjq");
     }
 
     private static void logApplicationStartup(Environment env) {

@@ -104,7 +104,9 @@ public class CryptocService {
     }
 
     /* Refresh wallet from net and save to file updated wallet state */
-    public void RefreshWallet(Wallet wallet,NetworkParameters netparams, String nickname){
+    public void RefreshWallet(NetworkParameters netparams, String nickname){
+
+        Wallet wallet = LoadWallet(nickname,netparams);
 
         System.out.println("START REFRESH...");
         File file = new File("wallets/"+nickname+".wallet");
@@ -145,7 +147,7 @@ public class CryptocService {
 
         BlockStore blockStore = new MemoryBlockStore(netParams);
         Coin coins = Coin.valueOf(amountToSend);
-
+        //String tmp  = "mpGV7f5iJRxh5Mg75yvhVZ6b9VDQg1wLjq";
         BlockChain chain = null;
 
         try {
