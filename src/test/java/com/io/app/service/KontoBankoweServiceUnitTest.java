@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GieldaKryptowalutApp.class)
 
-public class KontoBankoweServiceIntTest {
+public class KontoBankoweServiceUnitTest {
     @Autowired
     private KontoBankoweService kontoBankoweService;
 
@@ -46,6 +46,7 @@ public class KontoBankoweServiceIntTest {
 
     @Before
     public void init() {
+
         user = new User();
         user.setLogin("johndoe");
         user.setPassword(RandomStringUtils.random(60));
@@ -82,10 +83,14 @@ public class KontoBankoweServiceIntTest {
     }
 
     public void czyZmienianaJestWartosc() {
-        kontoBankoweService.createNewKonto(user);
         KontoBankowe konto = kontoBankoweService.getKontoByUserId(user.getId());
         konto=kontoBankoweService.updateStanKonta(konto,1111.0);
         assertThat(konto.getStanKonta()).isEqualTo(6111);
+    }
+    @Test
+    @Transactional
+    public void test(){
+        assertThat(true);
     }
 
 }

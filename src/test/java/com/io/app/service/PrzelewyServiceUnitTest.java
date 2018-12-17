@@ -4,40 +4,22 @@ import com.io.app.domain.KontoBankowe;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.io.app.domain.User;
-import com.io.app.repository.KontoBankoweRepository;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.mockito.*;
-import org.springframework.data.auditing.AuditingHandler;
-import org.springframework.data.auditing.DateTimeProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
-public class PrzelewyServiceIntTest {
+public class PrzelewyServiceUnitTest {
     @Autowired
     private KontoBankoweService kontoBankoweService;
 
     private PrzelewyService przelewyService;
 
-    @Autowired
-    private AuditingHandler auditingHandler;
-
-    @Autowired
-    private KontoBankoweRepository kontoBankoweRepository;
-
-    private UserService userService;
-
     private User user;
     private User user1;
-
-    @Mock
-    DateTimeProvider dateTimeProvider;
 
     @Before
     public void init() {
@@ -63,9 +45,6 @@ public class PrzelewyServiceIntTest {
 
         kontoBankoweService.createNewKonto(user);
         kontoBankoweService.createNewKonto(user1);
-
-        when(dateTimeProvider.getNow()).thenReturn(Optional.of(LocalDateTime.now()));
-        auditingHandler.setDateTimeProvider(dateTimeProvider);
     }
 
     @Test
