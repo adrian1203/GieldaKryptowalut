@@ -53,6 +53,10 @@ public class OfertaSprzedazyService {
         return ofertaSprzedazyRepository.findForUser(this.userService.getUserWithAuthorities().get().getId()
         ,pageable);
     }
+    @Transactional(readOnly = true)
+    public  List<OfertaSprzedazy> getAllOfertySprzedazy(){
+        return this.ofertaSprzedazyRepository.findAll();
+    }
 
     public void update(OfertaSprzedazy ofertaSprzedazy){
         this.ofertaSprzedazyRepository.save(ofertaSprzedazy);

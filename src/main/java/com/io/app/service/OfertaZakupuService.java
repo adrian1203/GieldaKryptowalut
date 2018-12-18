@@ -46,6 +46,11 @@ public class OfertaZakupuService {
     public Page<OfertaZakupu> getAllActual(Pageable pageable) {
         return ofertaZakupuRepository.findActual(pageable);
     }
+
+    @Transactional(readOnly = true)
+    public List<OfertaZakupu> getAll(){
+        return this.ofertaZakupuRepository.findAll();
+    }
     @Transactional(readOnly = true)
     public Page<OfertaZakupu> getAllForUser(Pageable pageable) {
         return ofertaZakupuRepository.findForUser(this.userService.getUserWithAuthorities().get().getId(),

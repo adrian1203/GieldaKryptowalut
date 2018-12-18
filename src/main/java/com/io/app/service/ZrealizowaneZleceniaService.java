@@ -150,7 +150,7 @@ public class ZrealizowaneZleceniaService {
                 return false;
             } else {
                 realizeTransfer(ofertaZakupu, ofertaSprzedazy, ofertaSprzedazy.getPozostalaIlosc(), ofertaSprzedazy.getCena());
-                //ofertaZakupu.setPozostalaIlosc(0L);
+                ofertaZakupu.setPozostalaIlosc(0L);
                 return true;
             }
         }

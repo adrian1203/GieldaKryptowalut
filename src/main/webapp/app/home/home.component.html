@@ -6,6 +6,17 @@
         <h1 class="display-4" jhiTranslate="home.title"> Witamy</h1>
         <p class="lead" jhiTranslate="home.subtitle"></p>
 
+        <div>
+
+            <h2>Kursy na naszej giełdzie</h2>
+
+            <p>Kursy kupna: </p>
+            <p *ngIf="kursKupna">{{kursKupna}} BTC/PLN</p>
+            <br>
+            <p>Kursy sprzedazy: </p>
+            <p *ngIf="kursSprzedaz">{{kursSprzedaz}} BTC/PLN</p>
+        </div>
+
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
