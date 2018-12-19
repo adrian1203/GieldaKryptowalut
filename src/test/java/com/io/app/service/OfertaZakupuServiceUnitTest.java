@@ -47,4 +47,22 @@ public class OfertaZakupuServiceUnitTest {
         assertThat(of.getWaluta()).isEqualTo(oferta.getWaluta());
         assertThat(of.getTypZlecenia()).isEqualTo(oferta.getTypZlecenia());
     }
+
+    @Test
+    public void czyZmienianaJestOfertaV2() {
+        OfertaZakupu oferta = new OfertaZakupu();
+        ofertaZakupuService.createOfertaZakupu(oferta);
+        Long id = oferta.getId();
+        oferta.setPozostalaIlosc(20L);
+        oferta.setCena(2000);
+        ofertaZakupuService.update(oferta);
+        OfertaZakupu of=ofertaZakupuService.findById(id+1);
+        assertThat(of.getId()).isEqualTo(oferta.getId());
+        assertThat(of.getPozostalaIlosc()).isEqualTo(20L);
+        assertThat(of.getCena()).isEqualTo(2000);
+        assertThat(of.getIlosc()).isEqualTo(oferta.getIlosc());
+        assertThat(of.getDataWystawienia()).isEqualTo(oferta.getDataWystawienia());
+        assertThat(of.getWaluta()).isEqualTo(oferta.getWaluta());
+        assertThat(of.getTypZlecenia()).isEqualTo(oferta.getTypZlecenia());
+    }
 }

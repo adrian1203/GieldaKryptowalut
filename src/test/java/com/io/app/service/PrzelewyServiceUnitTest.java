@@ -50,11 +50,50 @@ public class PrzelewyServiceUnitTest {
     @Test
     @Transactional
     public void czyWysylanyJestPrzelew() {
+        double stan=0,stan1=0;
         KontoBankowe konto=kontoBankoweService.getKontoByUserId(user.getId());
         KontoBankowe konto1=kontoBankoweService.getKontoByUserId(user1.getId());
         przelewyService.createPrzelew(konto,konto1,1000.0);
-        assertThat(konto.getStanKonta()).isEqualTo(4000);
-        assertThat(konto1.getStanKonta()).isEqualTo(6000);
+        stan=konto.getStanKonta();
+        stan1=konto1.getStanKonta();
+        assertThat(konto.getStanKonta()).isEqualTo(stan-1000);
+        assertThat(konto1.getStanKonta()).isEqualTo(stan1+1000);
     }
+
+    @Test
+    @Transactional
+    public void czyWysylanyJestPrzelewNaToSamoKonto() {
+        double stan=0,stan1=0;
+        KontoBankowe konto=kontoBankoweService.getKontoByUserId(user.getId());
+        stan=konto.getStanKonta();
+        przelewyService.createPrzelew(konto,konto,1000.0);
+        assertThat(konto.getStanKonta()).isEqualTo(stan);
+    }
+
+    @Test
+    @Transactional
+    public void czyWysylanyJestUjemnyPrzelew() {
+        double stan=0,stan1=0;
+        KontoBankowe konto=kontoBankoweService.getKontoByUserId(user.getId());
+        KontoBankowe konto1=kontoBankoweService.getKontoByUserId(user1.getId());
+        przelewyService.createPrzelew(konto,konto1,-1000.0);
+        stan=konto.getStanKonta();
+        stan1=konto1.getStanKonta();
+        assertThat(konto.getStanKonta()).isEqualTo(stan);
+        assertThat(konto1.getStanKonta()).isEqualTo(stan1);
+    }
+    @Test
+    @Transactional
+    public void czyWysylanyJestZaDuzyPrzelew() {
+        double stan=0,stan1=0;
+        KontoBankowe konto=kontoBankoweService.getKontoByUserId(user.getId());
+        KontoBankowe konto1=kontoBankoweService.getKontoByUserId(user1.getId());
+        stan=konto.getStanKonta();
+        stan1=konto1.getStanKonta();
+        przelewyService.createPrzelew(konto,konto1,stan+1000.0);
+        assertThat(konto.getStanKonta()).isEqualTo(stan);
+        assertThat(konto1.getStanKonta()).isEqualTo(stan1);
+    }
+
 
 }
