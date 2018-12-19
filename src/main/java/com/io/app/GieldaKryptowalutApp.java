@@ -69,14 +69,15 @@ public class GieldaKryptowalutApp {
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
 
-        //Testing cryptoc
-       CryptocService ss = new CryptocService();
 
-//        Wallet wallet = ss.LoadWallet("main3",RegTestParams.get());
-        ss.RefreshWallet(RegTestParams.get(),"adi1");
-        ss.RefreshWallet(RegTestParams.get(),"adi2");
+        //Testing cryptoc
+//       CryptocService ss = new CryptocService();
+//
+////        Wallet wallet = ss.LoadWallet("main3",RegTestParams.get());
+//        ss.RefreshWallet(RegTestParams.get(),"adi1");
+//        ss.RefreshWallet(RegTestParams.get(),"adi2");
 //        //ss.GetWalletAdress("kuba",RegTestParams.get());
-       ss.GetWalletBalance("main3",RegTestParams.get());
+      // ss.GetWalletBalance("main3",RegTestParams.get());
         //ss.SendToAdress(wallet,"main2",RegTestParams.get(),100000000,"mpGV7f5iJRxh5Mg75yvhVZ6b9VDQg1wLjq");
     }
 

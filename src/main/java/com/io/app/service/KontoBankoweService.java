@@ -22,8 +22,8 @@ public class KontoBankoweService {
         KontoBankowe kontoBankowe = new KontoBankowe();
         kontoBankowe.setUser(user);
         kontoBankowe.setWaluta("PLN");
-        kontoBankowe.setStanKonta(5000);
-        kontoBankowe.setNumer("33333333333333");
+        kontoBankowe.setStanKonta(5000000);
+        kontoBankowe.setNumer("24102410241024102410"+Long.toString(user.getId()));
 
         this.kontoBankoweRepository.save(kontoBankowe);
 

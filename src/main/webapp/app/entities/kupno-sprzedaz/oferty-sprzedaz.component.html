@@ -1,10 +1,19 @@
 <p>
-  Moje Oferty Sprzedaży
+    
 
 <button class="btn btn-primary float-right jh-create-entity"  [routerLink]="['../kupno-oferty']" >
          <span>Pokaż moje oferty kupna</span>
 </button>
+
+<button class="btn btn-primary float-right jh-create-entity" [routerLink]="['../kupno-sprzedaz-new-sprzedaz']" >
+    <fa-icon [icon]="'plus'"></fa-icon>
+    <span>Dodaj ofertę sprzedazy</span>
+
+</button>
 </p>
+<br>
+<h2>  Moje Oferty Sprzedaży
+    </h2>
 <div>
     <div class="table-responsive" *ngIf="ofertaSprzedazys">
     <table class="table table-striped">

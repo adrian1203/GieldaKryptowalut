@@ -33,6 +33,7 @@ public class KontoBankoweResurce {
     @GetMapping("/kontoBTC-user")
     @Timed
     public Long getWalletBalance(){
+        //this.cryptocService.RefreshWallet(RegTestParams.get(),this.userService.getUserWithAuthorities().get().getLogin() );
         return this.cryptocService.GetWalletBalance(this.userService.getUserWithAuthorities().get().getLogin(), RegTestParams.get());
     }
     @GetMapping("/kontoBTC-address")
@@ -44,6 +45,7 @@ public class KontoBankoweResurce {
     @GetMapping("/kontoBTC-refresh")
     @Timed
     void  Refresh(){
+        System.out.println("Tituaj jestam");
        // return this.cryptocService.GetWalletAdress(this.userService.getUserWithAuthorities().get().getLogin(), RegTestParams.get());
         this.cryptocService.RefreshWallet(RegTestParams.get(),this.userService.getUserWithAuthorities().get().getLogin() );
     }

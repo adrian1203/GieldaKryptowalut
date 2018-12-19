@@ -103,7 +103,8 @@ public class ZrealizowaneZleceniaService {
         Wallet senderWallet= this.cryptocService.LoadWallet(new String(senderLogin), RegTestParams.get());
         String respientAdress = this.cryptocService.GetWalletAdress(recipientLogin,RegTestParams.get());
 
-        this.cryptocService.SendToAdress(senderWallet,senderLogin,RegTestParams.get(),ilosc,new String(respientAdress));
+//        new Thread(new CryptocService(this.userService)).run();
+       this.cryptocService.SendToAdress(senderWallet,senderLogin,RegTestParams.get(),ilosc,new String(respientAdress));
 
     }
 
