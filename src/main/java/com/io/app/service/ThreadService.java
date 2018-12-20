@@ -21,7 +21,7 @@ public class ThreadService implements LifeCycle {
 
     @PostConstruct
     public void setup() {
-        threadPool.scheduleAtFixedRate(cryptocService, 1, 50, TimeUnit.SECONDS);
+        threadPool.scheduleAtFixedRate(cryptocService, 60, 120, TimeUnit.SECONDS);
     }
 
     @Override

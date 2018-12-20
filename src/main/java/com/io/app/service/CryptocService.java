@@ -144,33 +144,33 @@ public class CryptocService implements Runnable {
     /* Send bitcoins to address */
     public void SendToAdress(Wallet wallet,String username, NetworkParameters netParams,long amountToSend,String recipient){
 
-//        BlockStore blockStore = new MemoryBlockStore(netParams);
-//        Coin coins = Coin.valueOf(amountToSend);
-//        //String tmp  = "mpGV7f5iJRxh5Mg75yvhVZ6b9VDQg1wLjq";
-//        BlockChain chain = null;
-//
-//        try {
-//             chain = new BlockChain(netParams, wallet, blockStore);
-//        } catch (BlockStoreException e) {
-//            System.out.println("Blockstore exception in sendToAddress!");
-//        }
-//
-//        final PeerGroup peerGroup = new PeerGroup(netParams, chain);
-//        peerGroup.startAsync();
-//
-//        Address recipientAddress = new Address(netParams, recipient);
-//
-//        try{
-//            Wallet.SendResult sendResult = wallet.sendCoins(peerGroup,recipientAddress,coins);
-//            checkNotNull(sendResult);
-//        } catch (InsufficientMoneyException e) {
-//            System.out.println("You don't have enough satoshii in wallet!");
-//        }
-//
-//        peerGroup.downloadBlockChain();
-//        peerGroup.stopAsync();
-//        SaveWallet(wallet,username);
-//        System.out.println("Send oparation success!");
+        BlockStore blockStore = new MemoryBlockStore(netParams);
+        Coin coins = Coin.valueOf(amountToSend);
+        //String tmp  = "mpGV7f5iJRxh5Mg75yvhVZ6b9VDQg1wLjq";
+        BlockChain chain = null;
+
+        try {
+             chain = new BlockChain(netParams, wallet, blockStore);
+        } catch (BlockStoreException e) {
+            System.out.println("Blockstore exception in sendToAddress!");
+        }
+
+        final PeerGroup peerGroup = new PeerGroup(netParams, chain);
+        peerGroup.startAsync();
+
+        Address recipientAddress = new Address(netParams, recipient);
+
+        try{
+            Wallet.SendResult sendResult = wallet.sendCoins(peerGroup,recipientAddress,coins);
+            checkNotNull(sendResult);
+        } catch (InsufficientMoneyException e) {
+            System.out.println("You don't have enough satoshii in wallet!");
+        }
+
+        peerGroup.downloadBlockChain();
+        peerGroup.stopAsync();
+        SaveWallet(wallet,username);
+        System.out.println("Send oparation success!");
     }
 
 
