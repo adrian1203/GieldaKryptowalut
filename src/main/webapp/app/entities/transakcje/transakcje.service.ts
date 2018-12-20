@@ -27,7 +27,6 @@ export class TransakcjeService {
         return this.http.get<string>(this.resourceUrl + `kontoBTC-address`, { observe: 'response' });
     }
     refresh() {
-        console.log('chuja2');
         return this.http.get<any>(this.resourceUrl + `kontoBTC-refresh`);
     }
 }
