@@ -90,6 +90,8 @@ export class TransakcjeComponent implements OnInit {
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         this.przelewys = data;
+        console.log(this.przelewys);
+        console.log(data);
     }
 
     private onError(error) {

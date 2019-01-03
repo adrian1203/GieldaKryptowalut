@@ -31,7 +31,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                 <th jhiSortBy="data">Data Wystawienia  <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th jhiSortBy="wartosc">Cena  <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th jhiSortBy="waluta">Typ Zlecenia <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="waluta">Z konta <fa-icon [icon]="'sort'"></fa-icon></th>
 
             </tr>
             </thead>
@@ -40,8 +40,7 @@
             <tr *ngFor="let przelew of przelewys; trackBy: trackIdentity">
                 <td>{{przelew.data  | date:'dd/MM/yy HH:mm'}}</td>
                 <td>{{przelew.wartosc}}</td>
-                <td>{{przelew.waluta}}</td>
-
+                <td>{{przelew.zKontoBankowe.numer}}</td>
             </tr>
             </tbody>
         </table>

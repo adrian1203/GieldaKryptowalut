@@ -42,6 +42,10 @@ public class Przelewy {
             '}';
     }
 
+    public Date getData() {
+        return data;
+    }
+
     public void setData(Date data) {
         this.data = data;
     }
