@@ -1,7 +1,6 @@
 package com.io.app.repository;
 
 import com.io.app.domain.OfertaSprzedazy;
-import com.io.app.domain.OfertaZakupu;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,6 +30,13 @@ public interface OfertaSprzedazyRepository extends JpaRepository<OfertaSprzedazy
         countQuery = "SELECT count(*) FROM oferta_sprzedazy WHERE typ_zlecenia='PKC' and pozostala_ilosc >0 ORDER BY datawystawienia ",
         nativeQuery = true)
     List<OfertaSprzedazy> findOferySprzedazyPKC();
+
+    @Query(value = "select cast(datawystawienia as VARCHAR(11)) as days , count(*)  from oferta_sprzedazy  group by days order by days ",
+        nativeQuery = true)
+    List<Object> getOferaSprzedazyChart();
+
+
+
 
 }
 

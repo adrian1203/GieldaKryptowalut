@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ZrealizowaneZleceniaService {
+public class ZrealizowaneZleceniaService implements Runnable{
     private final Logger log = LoggerFactory.getLogger(ZrealizowaneZlecenia.class);
 
     private final ZrealizowaneZleceniaRepository zrealizowaneZleceniaRepository;
@@ -182,5 +182,10 @@ public class ZrealizowaneZleceniaService {
         this.sprzedazPKC();
         this.kupnoPKC();
         this.transakcjeLIMIT();
+    }
+
+    @Override
+    public void run() {
+        this.wykonajTransakcje();
     }
 }

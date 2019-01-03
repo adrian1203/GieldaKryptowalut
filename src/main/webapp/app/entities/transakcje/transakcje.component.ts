@@ -68,7 +68,6 @@ export class TransakcjeComponent implements OnInit {
         return item.id;
     }
     refresh() {
-        console.log('chuj');
         this.transakcjeService.refresh();
     }
 

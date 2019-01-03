@@ -32,7 +32,7 @@ public class OfertaSprzedazyResource {
     public ResponseEntity<OfertaSprzedazy> createOfertaSprzedazy(@RequestBody OfertaSprzedazy ofertaSprzedazy) {
 
         ResponseEntity re =  ResponseEntity.ok(this.ofertaSprzedazyService.createOfertaSprzedarzy(ofertaSprzedazy));
-        this.zrealizowaneZleceniaService.wykonajTransakcje();
+        //this.zrealizowaneZleceniaService.wykonajTransakcje();
         return re;
 
     }

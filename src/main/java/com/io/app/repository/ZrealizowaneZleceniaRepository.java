@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface ZrealizowaneZleceniaRepository extends JpaRepository<ZrealizowaneZlecenia, Long> {
 
 //    @Query(value = "SELECT * FROM zrealizowane_zlecenia WHERE oferta_sprzedazy_id = ?1 or oferta_zakupu_id = ?1" +
@@ -22,6 +24,14 @@ public interface ZrealizowaneZleceniaRepository extends JpaRepository<Zrealizowa
             "        \"join oferta_zakupu oz  on(zz.oferta_zakupu_id=oz.id) where os.jhi_user_id=?1 or oz.jhi_user_id=?1 ",
         nativeQuery = true)
     Page<ZrealizowaneZlecenia> findForUser(Long id, Pageable pageable);
+
+    @Query(value = "select cast(data_realizacji as VARCHAR(11)) as days , count(*)  from zrealizowane_zlecenia   group  by days order by days ",
+        nativeQuery = true)
+    List<Object> getZleceniaChart();
+
+    @Query(value = "select cast(data_realizacji as VARCHAR(11)) as days , sum(ilosc*cena)  from zrealizowane_zlecenia  group by days order by days ",
+        nativeQuery = true)
+    List<Object> getSumZleceniaChart();
 
 
 }

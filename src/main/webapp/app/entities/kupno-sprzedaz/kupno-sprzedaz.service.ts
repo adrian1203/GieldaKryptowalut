@@ -26,4 +26,8 @@ export class KupnoSprzedazService {
         const options = createRequestOption(req);
         return this.http.get<ZrealizowaneZlecenia[]>(this.resourceUrl + `zlecenia//findAll-user`, { params: options, observe: 'response' });
     }
+    wykonajZlecenie() {
+        console.log('wykonuje');
+        this.http.get(this.resourceUrl + `zlecenia/wykonaj`);
+    }
 }

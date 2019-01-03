@@ -14,6 +14,8 @@ public class ThreadService implements LifeCycle {
     private ScheduledExecutorService threadPool = Executors.newScheduledThreadPool(1);
     @Autowired
     CryptocService cryptocService;
+    @Autowired
+    ZrealizowaneZleceniaService zrealizowaneZleceniaService;
 
     @Override
     public void start() {
@@ -21,7 +23,9 @@ public class ThreadService implements LifeCycle {
 
     @PostConstruct
     public void setup() {
+
         threadPool.scheduleAtFixedRate(cryptocService, 60, 120, TimeUnit.SECONDS);
+        threadPool.scheduleAtFixedRate(zrealizowaneZleceniaService,10,60,TimeUnit.SECONDS);
     }
 
     @Override

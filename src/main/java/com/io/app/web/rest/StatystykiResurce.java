@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/statystyki")
 public class StatystykiResurce {
@@ -28,4 +30,29 @@ public class StatystykiResurce {
     public Double getKursSprzedazy(){
         return this.statystykiService.getKursSprzedazy();
     }
+
+    @GetMapping("/sprzedaz-chart")
+    @Timed
+    public List<Object> getOfertaSprzedazyChart(){
+        return this.statystykiService.getOfertaSprzedazyChart();
+    }
+
+    @GetMapping("/zakup-chart")
+    @Timed
+    public List<Object> getOfertaZakupuChart(){
+        return this.statystykiService.getOfertaZakupuChart();
+    }
+
+    @GetMapping("/zlecenia-chart")
+    @Timed
+    public List<Object> getZleceniaChart(){
+        return this.statystykiService.getZleceniaChart();
+    }
+
+    @GetMapping("/zlecenia-chart-sum")
+    @Timed
+    public List<Object> getSumZleceniaChart(){
+        return this.statystykiService.getSumZleceniaChart();
+    }
+
 }

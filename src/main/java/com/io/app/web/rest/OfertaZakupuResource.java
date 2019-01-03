@@ -30,7 +30,7 @@ public class OfertaZakupuResource {
     @Timed
     public ResponseEntity<OfertaZakupu> createOfertaZakupu(@RequestBody  OfertaZakupu ofertaZakupu) {
         ResponseEntity rs =ResponseEntity.ok(this.ofertaZakupuService.createOfertaZakupu(ofertaZakupu));
-        this.zrealizowaneZleceniaService.wykonajTransakcje();
+        //this.zrealizowaneZleceniaService.wykonajTransakcje();
         return rs;
 
     }

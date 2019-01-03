@@ -56,6 +56,7 @@ export class KupnoSprzedazNewOfertaSprzedazComponent implements OnInit {
     private onSaveSuccess(result) {
         this.isSaving = false;
         this.previousState();
+        this.kupnoSprzedazService.wykonajZlecenie();
     }
 
     private onSaveError() {

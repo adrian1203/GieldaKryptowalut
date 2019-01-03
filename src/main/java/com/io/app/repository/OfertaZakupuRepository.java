@@ -32,4 +32,8 @@ public interface OfertaZakupuRepository extends JpaRepository<OfertaZakupu, Long
         nativeQuery = true)
     List<OfertaZakupu> findOferyZakupuLIMIT();
 
+    @Query(value = "select cast(datawystawienia as VARCHAR(11)) as days , count(*)  from oferta_zakupu   group by days order by days ",
+        nativeQuery = true)
+    List<Object> getOferaZakupuChart();
+
 }

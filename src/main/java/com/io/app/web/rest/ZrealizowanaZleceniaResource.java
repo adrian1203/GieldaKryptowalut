@@ -55,4 +55,11 @@ public class ZrealizowanaZleceniaResource {
     }
 
 
+    @GetMapping("wykonaj")
+    public  void wykonajZlecenie(){
+
+        this.zrealizowaneZleceniaService.wykonajTransakcje();
+    }
+
+
 }
