@@ -6,6 +6,7 @@ import { JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 import { Principal } from '../../core/auth/principal.service';
 import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { HttpResponse } from '@angular/common/http';
+import { UserService } from 'app/core';
 
 @Component({
     selector: 'jhi-kupno-sprzedaz',
@@ -26,13 +27,15 @@ export class KupnoSprzedazComponent implements OnInit {
     predicate: any;
     previousPage: any;
     reverse: any;
+    userId: number;
     constructor(
         private kupnoSprzedazService: KupnoSprzedazService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private alertService: JhiAlertService,
         private principal: Principal,
-        private parseLinks: JhiParseLinks
+        private parseLinks: JhiParseLinks,
+        private userService: UserService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -46,6 +49,10 @@ export class KupnoSprzedazComponent implements OnInit {
     ngOnInit() {
         this.page = 1;
         this.loadAllOfertaSprzedazy();
+        this.userService.getUserId().subscribe(res => {
+            this.userId = res;
+            console.log(res);
+        });
     }
     trackIdentity(index, item: ZrealizowaneZlecenia) {
         return item.id;

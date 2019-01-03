@@ -202,4 +202,10 @@ public class UserResource {
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
     }
+    @GetMapping("/users/user-id")
+    @Timed
+    public Long getUserId(){
+       return this.userService.getUserWithAuthorities().get().getId();
+    }
+
 }

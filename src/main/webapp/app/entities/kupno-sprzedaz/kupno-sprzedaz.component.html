@@ -39,7 +39,9 @@
             <td>{{zlecenie.dataRealizacji | date:'dd/MM/yy HH:mm'}}</td>
             <td>{{zlecenie.cena}}</td>
             <td>{{zlecenie.ilosc}}</td>
-            <th></th>
+            <td *ngIf="zlecenie.ofertaSprzedazy.user.id==userId">Sprzedaż</td>
+            <td *ngIf="zlecenie.ofertaSprzedazy.user.id!=userId">Zakup</td>
+
 
         </tr>
         </tbody>
